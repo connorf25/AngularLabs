@@ -22,13 +22,14 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    if(this.userService.checkUser(this.login, this.pw)) {
-      this.fail = false;
-      this.router.navigateByUrl('/account')
-    } else {
-      this.fail = true;
-      console.log("Inccorect Login")
-    }
+    this.userService.checkUser(this.login, this.pw)
+    // if(this.userService.checkUser(this.login, this.pw)) {
+    //   this.fail = false;
+    //   this.router.navigateByUrl('/account')
+    // } else {
+    //   this.fail = true;
+    //   console.log("Incorrect Login")
+    // }
   }
 
 }

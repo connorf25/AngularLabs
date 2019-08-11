@@ -7,12 +7,13 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
-  email: String;
+  user: any;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-
+    this.user = JSON.parse(sessionStorage.getItem('user'))
   }
+  
 
 }
