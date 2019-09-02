@@ -32,13 +32,14 @@ export class UserAddComponent implements OnInit {
     console.log("Adding User..")
     if (this.suppString == "true") {
       this.newuser.supp = true;
-    } else {
-      this.newuser.supp = false;
-    }
-    if (this.ofGroupAdminsRoleString == "true") {
       this.newuser.ofGroupAdminsRole = true;
     } else {
-      this.newuser.ofGroupAdminsRole = false;
+      this.newuser.supp = false;
+      if (this.ofGroupAdminsRoleString == "true") {
+        this.newuser.ofGroupAdminsRole = true;
+      } else {
+        this.newuser.ofGroupAdminsRole = false;
+      }
     }
     console.log(this.newuser)
     this.httpClient.post('http://localhost:3000/api/addUser', this.newuser, { ...httpOptions, responseType: 'text' })
