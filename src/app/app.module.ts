@@ -1,7 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+// Material Angular
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule, MatSelectModule, MatButtonModule} from '@angular/material';
+
+// ng Bootstrap
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,8 +31,10 @@ import { ManageGroupsComponent } from './manage-groups/manage-groups.component';
   ],
   imports: [
     BrowserAnimationsModule,
+    NgbModule,
+    MatInputModule,
     MatSelectModule,
-    BrowserModule,
+    MatButtonModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule

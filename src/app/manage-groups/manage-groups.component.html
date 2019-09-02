@@ -1,1 +1,30 @@
-<p>manage-groups works!</p>
+<h1>Create New Group</h1>
+<mat-form-field>
+    <textarea matInput placeholder="Group Name" [(ngModel)]="newGroupName"></textarea>
+</mat-form-field>
+<button mat-raised-button color="primary">Create Group</button>
+
+<h1>Manage Existing Groups</h1>
+<mat-form-field>
+    <mat-label>Select a Group</mat-label>
+    <mat-select [(value)]="selectedGroup">
+        <mat-option *ngFor="let group of groups; index as i" value={{i}}>{{group.name}}</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div *ngIf="selectedGroup">
+    <h3>Create New Channel</h3>
+    <mat-form-field>
+        <textarea matInput placeholder="Channel Name" [(ngModel)]="newChannelName"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Create Channel</button>
+
+    <h3>Manage Existing Channels</h3>
+    <mat-form-field>
+        <mat-label>Select a Group</mat-label>
+        <mat-select [(value)]="selectedChannel">
+            <mat-option *ngFor="let channel of groups[selectedGroup].channels; index as x" value={{x}}>{{channel.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
