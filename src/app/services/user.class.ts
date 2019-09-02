@@ -1,20 +1,19 @@
 export class User {
     username: string;
     email:string;
-    password:string;
-    valid:boolean;
+    pw:string;
     supp: boolean;
     ofGroupAdminsRole:boolean;
     groupList:string[];
     adminGroupList:string[];
+    valid?:boolean;
     birthdate?: string;
     age?:number;
 
     constructor() {
         this.username = "";
         this.email = "";
-        this.password = "";
-        this.valid = false;
+        this.pw = "";
         this.supp = false;
         this.ofGroupAdminsRole = false;
         this.groupList = [];

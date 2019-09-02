@@ -8,7 +8,7 @@ module.exports = function(req, res) {
     customer.pw = req.body.pw;
     customer.valid = false;
 
-    fs.readFile('./server/api/users.json', 'utf8', (err, jsonString) => {
+    fs.readFile('./server/data/users.json', 'utf8', (err, jsonString) => {
         if (err) {
             console.log("Error reading file from disk:", err)
             res.send(customer);

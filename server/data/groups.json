@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Test Group",
+        "channels": 
+        [
+            {
+                "name": "Channel 1",
+                "users": ["test", "admin"]
+            },
+            {
+                "name": "Channel 2",
+                "users": ["abc", "admin"]
+            }
+        ],
+        "users": ["test", "abc", "admin"]
+    }
+]

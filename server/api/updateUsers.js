@@ -5,7 +5,7 @@ module.exports = function(req, res) {
     var users = req.body;
 
     var jsonString = JSON.stringify(users)
-    fs.writeFile('./server/api/users.json', jsonString, err => {
+    fs.writeFile('./server/data/users.json', jsonString, err => {
         if (err) {
             console.log('Error writing file', err)
             res.send("Error writing");

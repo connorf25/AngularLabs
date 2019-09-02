@@ -6,7 +6,7 @@ module.exports = function(req, res) {
     var users;
     // Add some kind of authentication
 
-    fs.readFile('./server/api/users.json', 'utf8', (err, jsonString) => {
+    fs.readFile('./server/data/users.json', 'utf8', (err, jsonString) => {
         if (err) {
             console.log("Error reading file from disk:", err)
             res.send("Error reading file from disk");
@@ -27,7 +27,7 @@ module.exports = function(req, res) {
             console.log("Added: ", newuser)
 
             jsonString = JSON.stringify(users)
-            fs.writeFile('./server/api/users.json', jsonString, err => {
+            fs.writeFile('./server/data/users.json', jsonString, err => {
                 if (err) {
                     console.log('Error writing file', err)
                     res.send("Error writing");
