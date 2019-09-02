@@ -7,7 +7,7 @@ module.exports = function(req, res) {
 
     // Add some kind of authentication
 
-    fs.readFile('./server/users.json', 'utf8', (err, jsonString) => {
+    fs.readFile('./server/data/users.json', 'utf8', (err, jsonString) => {
         if (err) {
             console.log("Error reading file from disk:", err)
             res.send(users);
