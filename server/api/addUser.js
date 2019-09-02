@@ -14,7 +14,14 @@ module.exports = function(req, res) {
         }
         try {
             users = JSON.parse(jsonString)
-            console.log(users)
+
+            for (user in users) {
+                if (newuser.username == users[user].username) {
+                    console.log("User already exists")
+                    res.send("User already exists")
+                    return;
+                }
+            }
             
             users.push(newuser)
             console.log("Added: ", newuser)
