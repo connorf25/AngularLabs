@@ -11,6 +11,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
 // Can use this to host dist on port 3000
+// Run ngBuild to update
 app.use(express.static(__dirname + "/../dist/Week4/"));
 
 app.post('/api/auth', require('./api/auth.js'))

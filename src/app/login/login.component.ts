@@ -23,13 +23,16 @@ export class LoginComponent implements OnInit {
 
   submit() {
     this.userService.checkUser(this.login, this.pw)
-    // if(this.userService.checkUser(this.login, this.pw)) {
-    //   this.fail = false;
-    //   this.router.navigateByUrl('/account')
-    // } else {
-    //   this.fail = true;
-    //   console.log("Incorrect Login")
-    // }
+      .subscribe((data: any) => {
+        if (data.valid) {
+          console.log("Logged in")
+          sessionStorage.setItem('user', JSON.stringify(data));
+          this.router.navigateByUrl('/account');
+        } 
+        else {
+          console.log("Invalid username or email");
+          // Show dialog that informs user
+        }
+      })
   }
-
 }

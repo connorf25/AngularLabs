@@ -25,28 +25,9 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  checkUser(username, pw) {
+  checkUser(username: string, pw: string): Observable<any> {
     var user = {"username": username, "pw": pw}
-    this.httpClient.post('http://localhost:3000/api/auth', user, httpOptions)
-      .subscribe((data: any) => {
-        if (data.valid) {
-          console.log("Logged in")
-          // Store user in session storage
-          sessionStorage.setItem('user', JSON.stringify(data));
-        } else {
-          console.log("Invalid username or email")
-        }
-      })
+    return this.httpClient.post('http://localhost:3000/api/auth', user, httpOptions)
   }
-
-//   checkUser(email, pw): Boolean {
-//     for (let user in this.users) {
-//       console.log(this.users[user].email)
-//         if (email == this.users[user].email && pw == this.users[user].upwd) {
-//             return true;
-//         }
-//     }
-//     return false;
-//   }
 
 }
