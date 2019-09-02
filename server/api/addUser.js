@@ -13,7 +13,7 @@ module.exports = function(req, res) {
             return
         }
         try {
-            users = JSON.parse(jsonString).users
+            users = JSON.parse(jsonString)
             console.log(users)
             
             users.push(newuser)

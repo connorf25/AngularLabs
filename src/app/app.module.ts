@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { UserAddComponent } from './user-add/user-add.component';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserAddComponent } from './user-add/user-add.component';
     LoginComponent,
     AccountComponent,
     ProfileComponent,
-    UserAddComponent
+    UserAddComponent,
+    ManageUsersComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,0 +1,9 @@
+<div *ngIf="myuser.supp; else elseBlock">
+    <h1>Manage Users</h1>
+    <div *ngFor="let user of users; index as i">
+        <label>{{user.username }} </label><button (click)="delete(i)">Delete</button>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <p>Must be super admin</p>
+</ng-template>

@@ -1,4 +1,4 @@
-<div *ngIf="user.supp; else elseBlock">
+<div *ngIf="user.supp || user.ofGroupAdminsRole; else elseBlock">
     <h1>Add Account</h1>
     <label>Username: </label><input [(ngModel)]="newuser.username"><br>
     <label>Email: </label><input [(ngModel)]="newuser.email"><br>
@@ -18,5 +18,5 @@
     </mat-form-field> -->
 </div>
 <ng-template #elseBlock>
-    <p>Must be super user</p>
+    <p>Must be admin or super admin</p>
 </ng-template>

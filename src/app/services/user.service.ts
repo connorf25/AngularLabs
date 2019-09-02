@@ -13,9 +13,9 @@ class User {
   password:string;
   valid:boolean;
   supp: boolean;
-  ofGroupAdminsRole: boolean;
-  groupList: string[];
-  adminGroupList: string[];
+  ofGroupAdminsRole:boolean;
+  groupList:string[];
+  adminGroupList:string[];
   constructor(username:string, password:string) {
     this.username = username
     this.password = password

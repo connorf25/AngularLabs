@@ -16,7 +16,7 @@ module.exports = function(req, res) {
         }
         try {
             var users;
-            users = JSON.parse(jsonString).users
+            users = JSON.parse(jsonString)
             console.log(users)
             for (user in users) {
                 console.log(users[user])

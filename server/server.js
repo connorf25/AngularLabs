@@ -18,6 +18,8 @@ app.post('/api/auth', require('./api/auth.js'))
 
 app.post('/api/addUser', require('./api/addUser.js'))
 
+app.post('/api/getUsers', require('./api/getUsers.js'))
+
 const http = require("http").Server(app);
 let server = http.listen(3000, () => {
     let port = server.address().port;
