@@ -12,6 +12,10 @@ class User {
   email:string;
   password:string;
   valid:boolean;
+  supp: boolean;
+  ofGroupAdminsRole: boolean;
+  groupList: string[];
+  adminGroupList: string[];
   constructor(username:string, password:string) {
     this.username = username
     this.password = password
@@ -29,5 +33,6 @@ export class UserService {
     var user = {"username": username, "pw": pw}
     return this.httpClient.post('http://localhost:3000/api/auth', user, httpOptions)
   }
+
 
 }

@@ -16,6 +16,8 @@ app.use(express.static(__dirname + "/../dist/Week4/"));
 
 app.post('/api/auth', require('./api/auth.js'))
 
+app.post('/api/addUser', require('./api/addUser.js'))
+
 const http = require("http").Server(app);
 let server = http.listen(3000, () => {
     let port = server.address().port;

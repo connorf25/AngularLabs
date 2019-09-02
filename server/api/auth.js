@@ -1,6 +1,7 @@
 const fs = require('fs')
-
+// Usage: this.httpClient.post('http://localhost:3000/api/auth', user, httpOptions)
 module.exports = function(req, res) {
+    console.log("Login request recieved")
     var customer = {};
 
     customer.username = req.body.username;
@@ -28,7 +29,7 @@ module.exports = function(req, res) {
             }
             console.log("Sending: ", customer)
             res.send(customer);
-    } catch(err) {
+        } catch(err) {
             res.send(customer);
             console.log('Error parsing JSON string:', err)
         }

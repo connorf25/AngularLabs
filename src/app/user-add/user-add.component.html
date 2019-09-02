@@ -1,0 +1,22 @@
+<div *ngIf="user.supp; else elseBlock">
+    <h1>Add Account</h1>
+    <label>Username: </label><input [(ngModel)]="newuser.username"><br>
+    <label>Email: </label><input [(ngModel)]="newuser.email"><br>
+    <label>Password: </label><input [(ngModel)]="newuser.pw"><br>
+    <label>Birthdate: </label><input [(ngModel)]="newuser.birthdate" type="date"><br>
+    <label>Age: </label><input [(ngModel)]="newuser.age" type="number"><br>
+    <label>Super User: </label><input [(ngModel)]="suppString"><br>
+    <label>Group Admin: </label><input [(ngModel)]="ofGroupAdminsRoleString"><br>
+    <button (click)="add()">Add</button>
+    <!-- <mat-form-field>
+        <mat-label>Super User</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let option of [true, false]" [value]="newuser.supp">
+            {{option}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field> -->
+</div>
+<ng-template #elseBlock>
+    <p>Must be super user</p>
+</ng-template>

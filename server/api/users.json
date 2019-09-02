@@ -1,7 +1,4 @@
-{
-    "users": [
-        {"username": "abc", "pw": "123", "birthdate": "1997-10-22", "age": 23, "email": "abc@gmail.com"},
-        {"username": "test", "pw": "123456", "birthdate": "1917-10-22", "age": 93, "email": "test@gmail.com"},
-        {"username": "admin", "pw": "password", "birthdate": "2010-10-22", "age": 9, "email": "admin@company.com"}
-    ]
-}
+[{"username":"abc","pw":"123","birthdate":"1997-10-22","age":23,"email":"abc@gmail.com","supp":false,"ofGroupAdminsRole":false},
+{"username":"test","pw":"123456","birthdate":"1917-10-22","age":93,"email":"test@gmail.com","supp":false,"ofGroupAdminsRole":true},
+{"username":"admin","pw":"password","birthdate":"2010-10-22","age":9,"email":"admin@company.com","supp":true,"ofGroupAdminsRole":true},
+{"username":"newuser","pw":"new","birthdate":"1997-10-22","age":200,"email":"new@gmail.com","supp":false,"ofGroupAdminsRole":false}]
