@@ -78,5 +78,13 @@ export class ChatComponent implements OnInit {
 
   }
 
+  deleteGroup() {}
+
+  deleteChannel() {}
+
+  deleteAssistant() {}
+
+  deleteUser() {}
+
 
 }

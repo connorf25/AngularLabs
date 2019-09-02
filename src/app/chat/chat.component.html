@@ -8,6 +8,9 @@
                     [class.selected]="group === selectedGroup"
                     (click)="onSelect(group)">
                     <span>{{group}}</span>
+                    <button *ngIf="user.ofGroupAdminsRole" type="button" class="close" aria-label="Close" (click)="deleteGroup()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </li>
             </ul>
             <button *ngIf="user.ofGroupAdminsRole" type="button" class="btn btn-secondary" (click)="addGroup()">Add Group</button>
@@ -18,7 +21,12 @@
             <ul class="groups">
                 <li *ngFor="let channel of channels"
                     [class.selected]="channel.name === selectedChannel"
-                    (click)="onSelectChannel(channel)"><span>{{channel.name}}</span></li>
+                    (click)="onSelectChannel(channel)">
+                    <span>{{channel.name}}</span>
+                    <button *ngIf="ofGroupAssistantRole" type="button" class="close" aria-label="Close" (click)="deleteChannel()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </li>
             </ul>
             <button *ngIf="ofGroupAssistantRole" type="button" class="btn btn-secondary" (click)="addChannel()">Add Channel</button>
         </div>
@@ -38,6 +46,9 @@
             <ul class="groups">
                 <li *ngFor="let assistant of activeGroup.groupAssis">
                     <span>{{assistant}}</span>
+                    <button *ngIf="user.ofGroupAdminsRole" type="button" class="close" aria-label="Close" (click)="deleteAssistant()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </li>
             </ul>
             <button *ngIf="user.ofGroupAdminsRole" type="button" class="btn btn-secondary" (click)="addAssistant()">Add Assistant</button>
@@ -47,6 +58,9 @@
                 <ul class="groups">
                     <li *ngFor="let user of activeChannel.users">
                         <span>{{user}}</span>
+                        <button *ngIf="ofGroupAssistantRole" type="button" class="close" aria-label="Close" (click)="deleteUser()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </li>
                 </ul>
                 <button *ngIf="ofGroupAssistantRole" type="button" class="btn btn-secondary" (click)="addUserToChannel()">Add User</button>
