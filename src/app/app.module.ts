@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { ManageGroupsComponent } from './manage-groups/manage-groups.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
     AccountComponent,
     ProfileComponent,
     UserAddComponent,
-    ManageUsersComponent
+    ManageUsersComponent,
+    ManageGroupsComponent
   ],
   imports: [
     BrowserAnimationsModule,
