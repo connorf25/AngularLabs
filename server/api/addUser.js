@@ -1,5 +1,5 @@
 const fs = require('fs')
-// Usage: this.httpClient.post('http://localhost:3000/api/addUser', newuser, httpOptions)
+// Usage: this.httpClient.post('http://localhost:3000/api/addUser', newuser, { ...httpOptions, responseType: 'text' })
 module.exports = function(req, res) {
     console.log("Newuser request recieved")
     var newuser = req.body;

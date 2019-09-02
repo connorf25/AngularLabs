@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../services/user.class';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
@@ -16,15 +17,7 @@ export class UserAddComponent implements OnInit {
   suppString = "false";
   ofGroupAdminsRoleString = "false";
 
-  newuser = {
-    username: "", 
-    pw: "", 
-    birthdate: "", 
-    age: 0,
-    email: "", 
-    supp: false, 
-    ofGroupAdminsRole: false
-  };
+  newuser = new User();
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
@@ -47,17 +40,8 @@ export class UserAddComponent implements OnInit {
     } else {
       this.newuser.ofGroupAdminsRole = false;
     }
-    var newuser = {
-      "username": "newuser", 
-      "pw": "new", 
-      "birthdate": "1997-10-22", 
-      "age": 200,
-      "email": "new@gmail.com", 
-      "supp": false, 
-      "ofGroupAdminsRole": false
-    }
-    console.log(newuser)
-    this.httpClient.post('http://localhost:3000/api/addUser', newuser, { ...httpOptions, responseType: 'text' })
+    console.log(this.newuser)
+    this.httpClient.post('http://localhost:3000/api/addUser', this.newuser, { ...httpOptions, responseType: 'text' })
       .subscribe((data: any) => {
         console.log(data);
       })

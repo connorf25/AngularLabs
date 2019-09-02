@@ -6,6 +6,8 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
 
+import { User } from "../services/user.class"
+
 @Component({
   selector: 'app-manage-users',
   templateUrl: './manage-users.component.html',
@@ -26,14 +28,15 @@ export class ManageUsersComponent implements OnInit {
 
     this.httpClient.post('http://localhost:3000/api/getUsers', this.myuser, httpOptions)
       .subscribe((data: any) => {
-        console.log(data);
         this.users = data;
       }, error => console.log(error))
   }
 
   delete (i: number) {
     this.users.splice(i, 1);
-    console.log(this.users)
+    console.log(this.users);
+    this.httpClient.post('http://localhost:3000/api/updateUsers', this.users, { ...httpOptions, responseType: 'text' })
+      .subscribe((data:any) => console.log(data));
   }
 
 }
