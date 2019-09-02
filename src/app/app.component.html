@@ -1,11 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
+            <a class="nav-link" routerLink="/chat">Chat <!--<span class="sr-only">(current)</span>--></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/account">Account</a>
@@ -22,6 +19,11 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/manageUsers">Manage Users</a>
           </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" (click)="logOut()">Log Out</a>
           </li>
@@ -29,6 +31,4 @@
     </div>
 </nav>
  
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet class="h-100"></router-outlet>

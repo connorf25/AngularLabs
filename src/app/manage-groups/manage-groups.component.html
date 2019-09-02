@@ -2,7 +2,7 @@
 <mat-form-field>
     <textarea matInput placeholder="Group Name" [(ngModel)]="newGroupName"></textarea>
 </mat-form-field>
-<button mat-raised-button color="primary">Create Group</button>
+<button mat-raised-button color="primary" (click)="createGroup()">Create Group</button>
 
 <h1>Manage Existing Groups</h1>
 <mat-form-field>
@@ -17,7 +17,7 @@
     <mat-form-field>
         <textarea matInput placeholder="Channel Name" [(ngModel)]="newChannelName"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary">Create Channel</button>
+    <button mat-raised-button color="primary" (click)="createChannel()">Create Channel</button>
 
     <h3>Manage Existing Channels</h3>
     <mat-form-field>

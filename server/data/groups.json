@@ -1,17 +1,34 @@
 [
     {
         "name": "Test Group",
+        "groupAdmin": "admin",
+        "groupAssis": ["abc", "test"],
         "channels": 
         [
             {
                 "name": "Channel 1",
-                "users": ["test", "admin"]
+                "users": ["newuser"]
             },
             {
                 "name": "Channel 2",
                 "users": ["abc", "admin"]
             }
-        ],
-        "users": ["test", "abc", "admin"]
+        ]
+    },
+    {
+        "name": "Test Group 2",
+        "groupAdmin": "test",
+        "groupAssis": ["abc", "admin"],
+        "channels": 
+        [
+            {
+                "name": "Channel 1",
+                "users": ["newuser"]
+            },
+            {
+                "name": "Channel 2",
+                "users": ["abc", "admin"]
+            }
+        ]
     }
 ]

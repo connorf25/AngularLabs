@@ -5,7 +5,6 @@ export class User {
     supp: boolean;
     ofGroupAdminsRole:boolean;
     groupList:string[];
-    adminGroupList:string[];
     valid?:boolean;
     birthdate?: string;
     age?:number;
@@ -17,6 +16,5 @@ export class User {
         this.supp = false;
         this.ofGroupAdminsRole = false;
         this.groupList = [];
-        this.adminGroupList = [];
     }
 }

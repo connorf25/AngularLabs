@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 // Material Angular
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatInputModule, MatSelectModule, MatButtonModule} from '@angular/material';
+import {MatInputModule, MatSelectModule, MatButtonModule, MatSidenavModule} from '@angular/material';
 
 // ng Bootstrap
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageGroupsComponent } from './manage-groups/manage-groups.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ManageGroupsComponent } from './manage-groups/manage-groups.component';
     ProfileComponent,
     UserAddComponent,
     ManageUsersComponent,
-    ManageGroupsComponent
+    ManageGroupsComponent,
+    ChatComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -35,6 +37,7 @@ import { ManageGroupsComponent } from './manage-groups/manage-groups.component';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    MatSidenavModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule
