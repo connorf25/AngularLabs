@@ -1,16 +1,57 @@
 <div class="container-fluid h-100">
     <div class="row grid-divider h-100">
+
         <div class="col-2">
             <h4>Groups</h4>
+            <ul class="groups">
+                <li *ngFor="let group of groups"
+                    [class.selected]="group === selectedGroup"
+                    (click)="onSelect(group)">
+                    <span>{{group}}</span>
+                </li>
+            </ul>
+            <button *ngIf="user.ofGroupAdminsRole" type="button" class="btn btn-secondary" (click)="addGroup()">Add Group</button>
         </div>
+
         <div class="col-2">
             <h4>Channels</h4>
+            <ul class="groups">
+                <li *ngFor="let channel of channels"
+                    [class.selected]="channel.name === selectedChannel"
+                    (click)="onSelectChannel(channel)"><span>{{channel.name}}</span></li>
+            </ul>
+            <button *ngIf="ofGroupAssistantRole" type="button" class="btn btn-secondary" (click)="addChannel()">Add Channel</button>
         </div>
         <div class="col-6">
             <h4>Chat</h4>
         </div>
-        <div class="col-2">
-            <h4>Users</h4>
+
+        <div class="col-2" *ngIf="activeGroup">
+            <h5>Group Admin</h5>
+            <ul class="groups">
+                <li>
+                    <span>{{activeGroup.groupAdmin}}</span>
+                </li>
+            </ul>
+
+            <h5>Group Assistants</h5>
+            <ul class="groups">
+                <li *ngFor="let assistant of activeGroup.groupAssis">
+                    <span>{{assistant}}</span>
+                </li>
+            </ul>
+            <button *ngIf="user.ofGroupAdminsRole" type="button" class="btn btn-secondary" (click)="addAssistant()">Add Assistant</button>
+
+            <div *ngIf="activeChannel">
+                <h5>Channel Users</h5>
+                <ul class="groups">
+                    <li *ngFor="let user of activeChannel.users">
+                        <span>{{user}}</span>
+                    </li>
+                </ul>
+                <button *ngIf="ofGroupAssistantRole" type="button" class="btn btn-secondary" (click)="addUserToChannel()">Add User</button>
+            </div>
         </div>
+
     </div>
 </div>
