@@ -1,1 +1,1 @@
-[{"username":"super","email":"super@gmail.com","pw":"123","supp":true,"ofGroupAdminsRole":true,"groupList":[],"valid":true}]
+[{"username":"super","email":"super@gmail.com","pw":"123","supp":true,"ofGroupAdminsRole":true,"groupList":["Group 1"],"valid":true},{"email":"","pw":"","supp":false,"ofGroupAdminsRole":false,"groupList":["Group 1"]}]

@@ -273,9 +273,12 @@ export class ChatComponent implements OnInit {
     })
   }
 
-  deleteChannel() {
+  deleteChannel(index: number) {
     // Remove channel from group.channels array
+    this.activeGroup.channels.splice(index, 1)
     // SERVER: updateGroup
+    this.httpClient.post('http://localhost:3000/api/updateGroup', this.activeGroup, { ...httpOptions, responseType: 'text' })
+      .subscribe( (res:any) => console.log(res));
   }
 
 }
