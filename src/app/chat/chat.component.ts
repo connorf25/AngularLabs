@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { userInfo } from 'os';
+import {ModalDirective} from 'angular-bootstrap-md';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { AddGroupComponent } from '../modals/add-group/add-group.component'
+// import { userInfo } from 'os';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../services/user.class';
+import { Group, Channel } from '../services/group.class';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -25,16 +29,33 @@ var checkIfAssistant = (user: User, group, admin): boolean => {
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+  @ViewChild(ModalDirective, {static: false}) modal: ModalDirective;
   groups = [];
-  activeGroup;
-  activeChannel;
+  activeGroup: Group;
+  activeChannel: Channel;
   channels = [];
   user: User;
   selectedGroup: string;
   selectedChannel: string;
   ofGroupAssistantRole: boolean;
 
-  constructor(private router: Router, private httpClient: HttpClient) { }
+  constructor(private router: Router, private httpClient: HttpClient, private modalService: MDBModalService) { }
+
+  modalRef: MDBModalRef;
+  modalOptions = {
+    backdrop: true,
+    keyboard: true,
+    focus: true,
+    show: false,
+    ignoreBackdropClick: false,
+    class: '',
+    containerClass: '',
+    animated: true,
+    data: {
+        heading: 'Add Group',
+        content: { input: 'Group Name' }
+    }
+  }
 
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'))
@@ -63,18 +84,40 @@ export class ChatComponent implements OnInit {
   }
 
   addGroup() {
+    this.modalOptions.data.heading = "Add Group";
+    this.modalOptions.data.content.input = "Group Name";
+    this.modalRef = this.modalService.show(AddGroupComponent, this.modalOptions);
 
+    this.modalRef.content.action.subscribe( (result: any ) => { 
+      var newGroup = new Group(result, this.user.username)
+      console.log(newGroup);
+    })
   }
 
   addChannel() {
+    this.modalOptions.data.heading = "Add Channel";
+    this.modalOptions.data.content.input = "Channel Name";
+    this.modalRef = this.modalService.show(AddGroupComponent, this.modalOptions);
+
+    this.modalRef.content.action.subscribe( (result: any ) => { console.log(result) })
 
   }
 
   addAssistant() {
+    this.modalOptions.data.heading = "Add Assistant";
+    this.modalOptions.data.content.input = "Assistant Username";
+    this.modalRef = this.modalService.show(AddGroupComponent, this.modalOptions);
+
+    this.modalRef.content.action.subscribe( (result: any ) => { console.log(result) })
 
   }
 
   addUserToChannel() {
+    this.modalOptions.data.heading = "Add User";
+    this.modalOptions.data.content.input = "User Userame";
+    this.modalRef = this.modalService.show(AddGroupComponent, this.modalOptions);
+
+    this.modalRef.content.action.subscribe( (result: any ) => { console.log(result) })
 
   }
 

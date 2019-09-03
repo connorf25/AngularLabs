@@ -8,6 +8,8 @@ import {MatInputModule, MatSelectModule, MatButtonModule, MatSidenavModule} from
 // ng Bootstrap
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -19,6 +21,7 @@ import { UserAddComponent } from './user-add/user-add.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageGroupsComponent } from './manage-groups/manage-groups.component';
 import { ChatComponent } from './chat/chat.component';
+import { AddGroupComponent } from './modals/add-group/add-group.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { ChatComponent } from './chat/chat.component';
     UserAddComponent,
     ManageUsersComponent,
     ManageGroupsComponent,
-    ChatComponent
+    ChatComponent,
+    AddGroupComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -38,10 +42,12 @@ import { ChatComponent } from './chat/chat.component';
     MatSelectModule,
     MatButtonModule,
     MatSidenavModule,
+    MDBBootstrapModule.forRoot(),
     AppRoutingModule,
     FormsModule,
     HttpClientModule
   ],
+  entryComponents: [ AddGroupComponent ],
   providers: [],
   bootstrap: [AppComponent]
 })

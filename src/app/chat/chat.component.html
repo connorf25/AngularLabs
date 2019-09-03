@@ -13,7 +13,8 @@
                     </button>
                 </li>
             </ul>
-            <button *ngIf="user.ofGroupAdminsRole" type="button" class="btn btn-secondary" (click)="addGroup()">Add Group</button>
+            <!-- MODAL TO ADD GROUP -->
+            <button *ngIf="user.ofGroupAdminsRole" type="button" mdbBtn color="secondary" mdbWavesEffect (click)="addGroup()">Add Group</button>
         </div>
 
         <div class="col-2">
