@@ -13,16 +13,18 @@ export class Group {
     groupAdmin:string;
     groupAssis:string[];
     channels : Channel[];
+    allUsers: string[];
 
     constructor(name: string, admin: string) {
         this.name = name;
         this.groupAdmin = admin;
         this.groupAssis = [];
         this.channels = [];
+        this.allUsers = [admin];
     }
 
-    addChannel(name: string) {
-        let channelData = new Channel(name)
-        this.channels.push(channelData);
-    }
+    // public addChannel(name: string) {
+    //     let channelData = new Channel(name)
+    //     this.channels.push(channelData);
+    // }
 }

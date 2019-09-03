@@ -57,8 +57,8 @@
             <div *ngIf="activeChannel">
                 <h5>Channel Users</h5>
                 <ul class="groups">
-                    <li *ngFor="let user of activeChannel.users">
-                        <span>{{user}}</span>
+                    <li *ngFor="let channelUser of activeChannel.users">
+                        <span>{{channelUser}}</span>
                         <button *ngIf="ofGroupAssistantRole" type="button" class="close" aria-label="Close" (click)="deleteUser()">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -66,6 +66,17 @@
                 </ul>
                 <button *ngIf="ofGroupAssistantRole" type="button" class="btn btn-secondary" (click)="addUserToChannel()">Add User</button>
             </div>
+
+            <h5>Server Users</h5>
+            <ul class="groups">
+                <li *ngFor="let serverUser of activeGroup.allUsers">
+                    <span>{{serverUser}}</span>
+                    <button *ngIf="user.ofGroupAdminsRole && serverUser != activeGroup.groupAdmin" type="button" class="close" aria-label="Close" (click)="deleteUser()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </li>
+            </ul>
+            <button *ngIf="user.ofGroupAdminsRole" type="button" class="btn btn-secondary" (click)="addUserToChannel()">Invite</button>
         </div>
 
     </div>
