@@ -30,6 +30,10 @@ app.post('/api/updateUser', require('./api/updateUser.js'))
 
 app.post('/api/addUserToServer', require('./api/addUserToServer.js'))
 
+app.post('/api/removeUserFromServer', require('./api/removeUserFromServer.js'))
+
+app.post('/api/removeGroup', require('./api/removeGroup.js'))
+
 const http = require("http").Server(app);
 let server = http.listen(3000, () => {
     let port = server.address().port;

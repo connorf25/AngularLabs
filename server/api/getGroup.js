@@ -24,7 +24,7 @@ module.exports = function(req, res) {
                     return;
                 }
             }
-            
+            res.send(group)
         } catch(err) {
             res.send(group);
             console.log('Error parsing JSON string:', err)

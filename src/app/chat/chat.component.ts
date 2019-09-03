@@ -73,6 +73,21 @@ export class ChatComponent implements OnInit {
     this.httpClient.post('http://localhost:3000/api/getGroup', {"name": this.selectedGroup}, httpOptions).subscribe((data: any) => {
       this.activeGroup = data
 
+      //If group does not exist remove from user grouplist
+      console.log(data)
+      if (data == null) {
+        this.httpClient.post('http://localhost:3000/api/removeUserFromServer', {"username": this.user.username, "servername": this.selectedGroup}, { ...httpOptions, responseType: 'text' })
+          .subscribe( (data:string) => {
+            console.log(data)
+          })
+        for (var i = 0; i < this.user.groupList.length; i++) {
+          if (this.user.groupList[i] == this.selectedGroup) {
+            this.user.groupList.splice(i, 1);
+          }
+        }
+        return
+      }
+
       // NEED TO CHECK USER BEFORE GETTING CHANNELS
       this.channels = this.activeGroup.channels
 
@@ -174,36 +189,88 @@ export class ChatComponent implements OnInit {
     this.modalOptions.data.content.input = "User Userame";
     this.modalRef = this.modalService.show(AddGroupComponent, this.modalOptions);
 
-    this.modalRef.content.action.subscribe( (result: string ) => { 
+    this.modalRef.content.action.subscribe( (username: string ) => { 
       // If user.username does not exist in group.allUsers: error
+      if (!this.activeGroup.allUsers.includes(username)) {
+        console.log("User does not exist in group")
+        return
+      }
       // Add user.username to group.channel[i].users
+      this.activeChannel.users.push(username)
       // SERVER: updateGroup
-      console.log(result) 
+      this.httpClient.post('http://localhost:3000/api/updateGroup', this.activeGroup, { ...httpOptions, responseType: 'text' })
+        .subscribe( (res:any) => console.log(res));
     })
 
   }
 
-  removeUserFromServer() {
+  removeUserFromServer(username: string) {
     // Remove user from group.allUsers
-    // SERVER: updateGroup
+    for( var i = 0; i < this.activeGroup.allUsers.length; i++){ 
+      if ( this.activeGroup.allUsers[i] == username) {
+        this.activeGroup.allUsers.splice(i, 1); 
+      }
+    }
+    // Remove user from all channels
+    for ( var i = 0; i < this.activeGroup.channels.length; i++) {
+      this.removeUserFromChannel(username, this.activeGroup.channels[i])
+    }
+    // Remove user from assistance group if they are a member
+    // This function also updates the group on the server
+    this.removeAssistant(username)
     // Remove group from user.groupList
-    // SERVER: updateUser
+    this.httpClient.post('http://localhost:3000/api/removeUserFromServer', {"username": username, "servername": this.activeGroup.name}, { ...httpOptions, responseType: 'text' })
+      .subscribe( (data:string) => {
+        console.log(data)
+      })
   }
 
-  removeUserFromChannel() {
+  removeUserFromChannel(username: string, channel: Channel) {
     // Remove user from group.channel[i].users
+    for( var i = 0; i < channel.users.length; i++){ 
+      if ( channel.users[i] == username) {
+        channel.users.splice(i, 1); 
+      }
+    }
     // SERVER: updateGroup
+    this.httpClient.post('http://localhost:3000/api/updateGroup', this.activeGroup, { ...httpOptions, responseType: 'text' })
+      .subscribe( (res:any) => console.log(res));
   }
 
-  removeAssistant() {
+  removeAssistant(username: string) {
     // Remove assistant from group.groupAssis
+    for( var i = 0; i < this.activeGroup.groupAssis.length; i++ ){ 
+      if ( this.activeGroup.groupAssis[i] == username) {
+        console.log("Removing ", username, " from groupAssis")
+        this.activeGroup.groupAssis.splice(i, 1); 
+      }
+    }
     // SERVER: updateGroup
+    this.httpClient.post('http://localhost:3000/api/updateGroup', this.activeGroup, { ...httpOptions, responseType: 'text' })
+        .subscribe( (res:any) => console.log(res));
   }
 
-  deleteGroup() {
-    // For each group.allUsers : 
-    //    removeUserFromServer()
-    // SERVER: Remove Group
+  deleteGroup(groupName: String) {
+    // Get Group
+    this.httpClient.post('http://localhost:3000/api/getGroup', {"name": groupName}, httpOptions).subscribe((data: Group) => {
+      if (data == null) return
+      var group: Group = data
+      console.log(group)
+      console.log("Inside del")
+      // For each user in group
+      for (var i = 0; i < group.allUsers.length; i++) {
+        console.log("Removing group from user list...")
+        this.httpClient.post('http://localhost:3000/api/removeUserFromServer', {"username": group.allUsers[i], "servername": group.name}, { ...httpOptions, responseType: 'text' })
+          .subscribe( (data:string) => {
+            console.log(data)
+            // Update User Locally
+            sessionStorage.setItem('user', JSON.stringify(this.user));
+          })
+      }
+      // SERVER: Remove Group
+      this.httpClient.post('http://localhost:3000/api/removeGroup', {"name": groupName}, { ...httpOptions, responseType: 'text' })
+        .subscribe((data:string) => console.log(data))
+    })
   }
 
   deleteChannel() {

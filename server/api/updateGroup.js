@@ -19,7 +19,6 @@ module.exports = function(req, res) {
             for (i in groups) {
                 if (groups[i].name == group.name) {
                     groups[i] = group
-                    console.log(group)
                     // Write to file
                     jsonString = JSON.stringify(groups)
                     fs.writeFile('./server/data/groups.json', jsonString, err => {

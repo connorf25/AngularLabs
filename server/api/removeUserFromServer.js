@@ -1,8 +1,8 @@
 const fs = require('fs')
-// Usage: this.httpClient.post('http://localhost:3000/api/addUserToServer', {username, servername}, { ...httpOptions, responseType: 'text' })
+// Usage: this.httpClient.post('http://localhost:3000/api/removeUserFromServer', {username, servername}, { ...httpOptions, responseType: 'text' })
 // Adds server to user groupList, still need to update group seperately
 module.exports = function(req, res) {
-    console.log("AddUserToServer request recieved")
+    console.log("RemoveUserFromServer request recieved")
     var username = req.body.username;
     var servername = req.body.servername
     var users;
@@ -19,8 +19,13 @@ module.exports = function(req, res) {
 
             for (i in users) {
                 if (username == users[i].username) {
-                    console.log("User already exists")
-                    users[i].groupList.push(servername)
+                    console.log("User found")
+                    for( x in users[i].groupList){ 
+                        if ( users[i].groupList[x] == servername) {
+                            users[i].groupList.splice(x, 1); 
+                            console.log("Removed server from grouplist")
+                        }
+                     }
                     // Write changes to server
                     jsonString = JSON.stringify(users)
                     fs.writeFile('./server/data/users.json', jsonString, err => {
@@ -35,29 +40,6 @@ module.exports = function(req, res) {
                     return;
                 }
             }
-            var newuser = {
-                username: this.username,
-                email: "",
-                pw: "",
-                supp: false,
-                ofGroupAdminsRole: false,
-                groupList: [ servername ]
-
-            }
-            console.log("User does not exist, adding user")
-            users.push(newuser)
-            console.log("Added: ", newuser)
-
-            jsonString = JSON.stringify(users)
-            fs.writeFile('./server/data/users.json', jsonString, err => {
-                if (err) {
-                    console.log('Error writing file', err)
-                    res.send("Error writing new user");
-                } else {
-                    console.log('Successfully wrote file')
-                    res.send("New User added to server");
-                }
-            })
         } catch(err) {
             res.send('Error parsing JSON string');
             console.log('Error parsing JSON string:', err)

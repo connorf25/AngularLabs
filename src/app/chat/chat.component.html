@@ -4,11 +4,11 @@
         <div class="col-2">
             <h4>Groups</h4>
             <ul class="groups">
-                <li *ngFor="let group of groups"
-                    [class.selected]="group === selectedGroup"
-                    (click)="onSelect(group)">
-                    <span>{{group}}</span>
-                    <button *ngIf="user.ofGroupAdminsRole" type="button" class="close" aria-label="Close" (click)="deleteGroup()">
+                <li *ngFor="let groupName of groups"
+                    [class.selected]="groupName === selectedGroup"
+                    (click)="onSelect(groupName)">
+                    <span>{{groupName}}</span>
+                    <button *ngIf="user.ofGroupAdminsRole" type="button" class="close" aria-label="Close" (click)="deleteGroup(groupName)">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </li>
@@ -24,7 +24,7 @@
                     [class.selected]="channel.name === selectedChannel"
                     (click)="onSelectChannel(channel)">
                     <span>{{channel.name}}</span>
-                    <button *ngIf="ofGroupAssistantRole" type="button" class="close" aria-label="Close" (click)="deleteChannel()">
+                    <button *ngIf="ofGroupAssistantRole" type="button" class="close" aria-label="Close" (click)="deleteChannel(channel.name)">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </li>
@@ -47,7 +47,7 @@
             <ul class="groups">
                 <li *ngFor="let assistant of activeGroup.groupAssis">
                     <span>{{assistant}}</span>
-                    <button *ngIf="user.ofGroupAdminsRole" type="button" class="close" aria-label="Close" (click)="removeAssistant()">
+                    <button *ngIf="user.ofGroupAdminsRole" type="button" class="close" aria-label="Close" (click)="removeAssistant(assistant, activeChannel)">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </li>
@@ -71,7 +71,7 @@
             <ul class="groups">
                 <li *ngFor="let serverUser of activeGroup.allUsers">
                     <span>{{serverUser}}</span>
-                    <button *ngIf="user.ofGroupAdminsRole && serverUser != activeGroup.groupAdmin" type="button" class="close" aria-label="Close" (click)="removeUserFromServer()">
+                    <button *ngIf="user.ofGroupAdminsRole && serverUser != activeGroup.groupAdmin" type="button" class="close" aria-label="Close" (click)="removeUserFromServer(serverUser)">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </li>
