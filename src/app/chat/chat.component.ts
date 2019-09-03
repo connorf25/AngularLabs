@@ -91,6 +91,17 @@ export class ChatComponent implements OnInit {
     this.modalRef.content.action.subscribe( (result: any ) => { 
       var newGroup = new Group(result, this.user.username)
       console.log(newGroup);
+      this.httpClient.post('http://localhost:3000/api/updateGroup', newGroup, { ...httpOptions, responseType: 'text' })
+        .subscribe( (data:any) => {
+          if (data == "Successfully added group") {
+            this.user.groupList.push(newGroup.name)
+            console.log(this.user)
+            this.httpClient.post('http://localhost:3000/api/updateUser', this.user, { ...httpOptions, responseType: 'text' })
+              .subscribe((res:any) => console.log(res))
+            // Update User Locally
+            sessionStorage.setItem('user', JSON.stringify(this.user));
+          }
+        })
     })
   }
 
@@ -99,8 +110,10 @@ export class ChatComponent implements OnInit {
     this.modalOptions.data.content.input = "Channel Name";
     this.modalRef = this.modalService.show(AddGroupComponent, this.modalOptions);
 
-    this.modalRef.content.action.subscribe( (result: any ) => { console.log(result) })
-
+    this.modalRef.content.action.subscribe( (result: any ) => { 
+      this.activeGroup.addChannel(result);
+      this.httpClient.post('http://localhost:3000/api/updateGroup', this.activeGroup, { ...httpOptions, responseType: 'text' });
+    })
   }
 
   addAssistant() {

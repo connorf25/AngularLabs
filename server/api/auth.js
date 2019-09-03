@@ -22,7 +22,6 @@ module.exports = function(req, res) {
                 console.log(users[user])
                 if (customer.username == users[user].username && customer.pw == users[user].pw) {
                     customer = { ...users[user] };
-                    customer.pw = "";
                     customer.valid = true;
                     break;
                 }

@@ -24,6 +24,10 @@ app.post('/api/updateUsers', require('./api/updateUsers.js'))
 
 app.post('/api/getGroup', require('./api/getGroup.js'))
 
+app.post('/api/updateGroup', require('./api/updateGroup.js'))
+
+app.post('/api/updateUser', require('./api/updateUser.js'))
+
 const http = require("http").Server(app);
 let server = http.listen(3000, () => {
     let port = server.address().port;

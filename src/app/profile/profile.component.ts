@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +13,7 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   user: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'))
@@ -19,6 +23,8 @@ export class ProfileComponent implements OnInit {
   }
 
   save() {
+    this.httpClient.post('http://localhost:3000/api/updateUser', this.user, { ...httpOptions, responseType: 'text' })
+      .subscribe((res:any) => console.log(res))
     sessionStorage.setItem('user', JSON.stringify(this.user));
   }
 
