@@ -88,10 +88,23 @@ export class ChatComponent implements OnInit {
         return
       }
 
-      // NEED TO CHECK USER BEFORE GETTING CHANNELS
-      this.channels = this.activeGroup.channels
-
       this.ofGroupAssistantRole = checkIfAssistant(this.user, this.activeGroup, this.activeGroup.groupAdmin);
+      // NEED TO CHECK USER BEFORE GETTING CHANNELS
+      // If regular user only display channels user is in
+      if (this.ofGroupAssistantRole) {
+        this.channels = this.activeGroup.channels
+      } else {
+        for (var x = 0; x < this.activeGroup.channels.length; x++) {
+          // For each channel loop through users in channel
+          for (var y = 0; y < this.activeGroup.channels[x].users.length; y++) {
+            console.log(this.user.username, " == ", this.activeGroup.channels[x].users[y])
+            if (this.user.username == this.activeGroup.channels[x].users[y]) {
+              this.channels.push(this.activeGroup.channels[x]);
+              break;
+            }
+          }
+        }
+      }
       console.log(this.channels)
     })
   }
