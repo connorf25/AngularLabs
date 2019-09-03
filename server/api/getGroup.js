@@ -20,7 +20,6 @@ module.exports = function(req, res) {
             for (i in groups) {
                 if (groups[i].name == groupName) {
                     group = groups[i]
-                    console.log(group)
                     res.send(group);
                     return;
                 }

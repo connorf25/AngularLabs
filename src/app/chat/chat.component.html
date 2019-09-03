@@ -47,7 +47,7 @@
             <ul class="groups">
                 <li *ngFor="let assistant of activeGroup.groupAssis">
                     <span>{{assistant}}</span>
-                    <button *ngIf="user.ofGroupAdminsRole" type="button" class="close" aria-label="Close" (click)="deleteAssistant()">
+                    <button *ngIf="user.ofGroupAdminsRole" type="button" class="close" aria-label="Close" (click)="removeAssistant()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </li>
@@ -59,7 +59,7 @@
                 <ul class="groups">
                     <li *ngFor="let channelUser of activeChannel.users">
                         <span>{{channelUser}}</span>
-                        <button *ngIf="ofGroupAssistantRole" type="button" class="close" aria-label="Close" (click)="deleteUser()">
+                        <button *ngIf="ofGroupAssistantRole" type="button" class="close" aria-label="Close" (click)="removeUserFromChannel()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </li>
@@ -71,12 +71,12 @@
             <ul class="groups">
                 <li *ngFor="let serverUser of activeGroup.allUsers">
                     <span>{{serverUser}}</span>
-                    <button *ngIf="user.ofGroupAdminsRole && serverUser != activeGroup.groupAdmin" type="button" class="close" aria-label="Close" (click)="deleteUser()">
+                    <button *ngIf="user.ofGroupAdminsRole && serverUser != activeGroup.groupAdmin" type="button" class="close" aria-label="Close" (click)="removeUserFromServer()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </li>
             </ul>
-            <button *ngIf="user.ofGroupAdminsRole" type="button" class="btn btn-secondary" (click)="addUserToChannel()">Invite</button>
+            <button *ngIf="user.ofGroupAdminsRole" type="button" class="btn btn-secondary" (click)="addUserToServerModal()">Invite</button>
         </div>
 
     </div>

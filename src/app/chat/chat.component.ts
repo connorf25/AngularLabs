@@ -7,6 +7,7 @@ import { AddGroupComponent } from '../modals/add-group/add-group.component'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../services/user.class';
 import { Group, Channel } from '../services/group.class';
+import { group } from '@angular/animations';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -120,18 +121,32 @@ export class ChatComponent implements OnInit {
       })
   }
 
-  addUserToServer() {
+  addUserToServer(username: string) {
+    // If user does not exist in server
+    if (!this.activeGroup.allUsers.includes(username)) {
+      // SERVER: Add group to user groupList
+      this.httpClient.post('http://localhost:3000/api/addUserToServer', {"username": username, "servername": this.activeGroup.name}, { ...httpOptions, responseType: 'text' })
+        .subscribe( (data:string) => {
+          console.log(data)
+          // Add user to group list
+          this.activeGroup.allUsers.push(username)
+          // SERVER: updateGroup
+          this.httpClient.post('http://localhost:3000/api/updateGroup', this.activeGroup, { ...httpOptions, responseType: 'text' })
+            .subscribe( (res:any) => console.log(res));
+        })
+    }
+    else {
+      console.log("User already exists in server")
+    }
+  }
+
+  addUserToServerModal() {
     this.modalOptions.data.heading = "Add User to Server";
     this.modalOptions.data.content.input = "User Userame";
     this.modalRef = this.modalService.show(AddGroupComponent, this.modalOptions);
 
-    this.modalRef.content.action.subscribe( (result: string ) => {
-      // Fetch user from server, if user does not exist create user
-      // Add group.name to user.groupList
-      // SERVER: updateUser
-      // Add user.username to group.allUsers
-      // SERVER: updateGroup
-      console.log(result)  
+    this.modalRef.content.action.subscribe( (username: string ) => {
+      this.addUserToServer(username)
     })
   }
 
@@ -140,11 +155,16 @@ export class ChatComponent implements OnInit {
     this.modalOptions.data.content.input = "Assistant Username";
     this.modalRef = this.modalService.show(AddGroupComponent, this.modalOptions);
 
-    this.modalRef.content.action.subscribe( (result: string ) => { 
-      // If user.username does not exist in group.allUsers addUserToServer()
-      // Add user.username to group.groupAssis array
+    this.modalRef.content.action.subscribe( (username: string ) => { 
+      // If username does not exist in group.allUsers addUserToServer()
+      if (!this.activeGroup.allUsers.includes(username)) {
+        this.addUserToServer(username)
+      }
+      // Add username to group.groupAssis array
+      this.activeGroup.groupAssis.push(username)
       // SERVER: updateGroup
-      console.log(result) 
+      this.httpClient.post('http://localhost:3000/api/updateGroup', this.activeGroup, { ...httpOptions, responseType: 'text' })
+            .subscribe( (res:any) => console.log(res));
     })
 
   }
@@ -161,17 +181,6 @@ export class ChatComponent implements OnInit {
       console.log(result) 
     })
 
-  }
-
-  deleteGroup() {
-    // For each group.allUsers : 
-    //    removeUserFromServer()
-    // SERVER: Remove Group
-  }
-
-  deleteChannel() {
-    // Remove channel from group.channels array
-    // SERVER: updateGroup
   }
 
   removeUserFromServer() {
@@ -191,6 +200,15 @@ export class ChatComponent implements OnInit {
     // SERVER: updateGroup
   }
 
+  deleteGroup() {
+    // For each group.allUsers : 
+    //    removeUserFromServer()
+    // SERVER: Remove Group
+  }
 
+  deleteChannel() {
+    // Remove channel from group.channels array
+    // SERVER: updateGroup
+  }
 
 }

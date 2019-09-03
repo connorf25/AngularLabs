@@ -28,6 +28,8 @@ app.post('/api/updateGroup', require('./api/updateGroup.js'))
 
 app.post('/api/updateUser', require('./api/updateUser.js'))
 
+app.post('/api/addUserToServer', require('./api/addUserToServer.js'))
+
 const http = require("http").Server(app);
 let server = http.listen(3000, () => {
     let port = server.address().port;

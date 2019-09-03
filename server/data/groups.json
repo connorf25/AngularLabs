@@ -1,1 +1,1 @@
-[{"name":"Group 1","groupAdmin":"admin","groupAssis":[],"channels":[],"allUsers":["admin"]}]
+[{"name":"Group 1","groupAdmin":"admin","groupAssis":["test"],"channels":[],"allUsers":["admin","abc","test"]}]
