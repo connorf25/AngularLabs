@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../services/user.class';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -11,13 +12,13 @@ const httpOptions = {
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  user: any;
+  user: User;
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'))
-    if (!this.user || this.user == "null" || !this.user.valid) {
+    if (!this.user || this.user.username == "" || !this.user.valid) {
       this.router.navigateByUrl('/login')
     }
   }
