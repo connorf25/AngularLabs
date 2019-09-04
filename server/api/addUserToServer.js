@@ -3,10 +3,12 @@ const fs = require('fs')
 // Adds server to user groupList, still need to update group seperately
 module.exports = function(req, res) {
     console.log("AddUserToServer request recieved")
-    var username = req.body.username;
-    var servername = req.body.servername
+    var input = req.body;
+    var username = input.username
+    var servername = input.servername
     var users;
     // Add some kind of authentication
+    console.log("Adding: ", username, " to: ", servername)
 
     fs.readFile('./server/data/users.json', 'utf8', (err, jsonString) => {
         if (err) {
@@ -36,7 +38,7 @@ module.exports = function(req, res) {
                 }
             }
             var newuser = {
-                username: this.username,
+                username: username,
                 email: "",
                 pw: "",
                 supp: false,

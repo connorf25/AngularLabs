@@ -152,6 +152,7 @@ export class ChatComponent implements OnInit {
   addUserToServer(username: string) {
     // If user does not exist in server
     if (!this.activeGroup.allUsers.includes(username)) {
+      console.log("Adding new user: ", username)
       // SERVER: Add group to user groupList
       this.httpClient.post('http://localhost:3000/api/addUserToServer', {"username": username, "servername": this.activeGroup.name}, { ...httpOptions, responseType: 'text' })
         .subscribe( (data:string) => {
