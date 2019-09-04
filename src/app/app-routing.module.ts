@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'userAdd', component: UserAddComponent},
   {path: 'manageUsers', component: ManageUsersComponent},
   {path: 'manageGroups', component: ManageGroupsComponent},
-  {path: 'chat', component: ChatComponent},
+  {path: '', component: ChatComponent},
 ];
 
 @NgModule({

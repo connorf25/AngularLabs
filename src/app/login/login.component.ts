@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         if (data.valid) {
           console.log("Logged in")
           sessionStorage.setItem('user', JSON.stringify(data));
-          this.router.navigateByUrl('/account');
+          this.router.navigateByUrl('');
         } 
         else {
           console.log("Invalid username or email");
