@@ -119,6 +119,7 @@ Return Value: Success/Error String
 
 ## UPDATE USERS
 `/api/updateUsers`
+
 Given a list of all users, overwrite the current users.json file
 
 Parameters: Array of user objects
