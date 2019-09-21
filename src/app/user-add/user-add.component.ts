@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../services/user.class';
+import { DataService } from '../services/data.service';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
@@ -19,7 +20,7 @@ export class UserAddComponent implements OnInit {
 
   newuser = new User();
 
-  constructor(private router: Router, private httpClient: HttpClient) { }
+  constructor(private router: Router, private httpClient: HttpClient, private dataService: DataService) { }
 
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'))
@@ -42,10 +43,7 @@ export class UserAddComponent implements OnInit {
       }
     }
     console.log(this.newuser)
-    this.httpClient.post('http://localhost:3000/api/addUser', this.newuser, { ...httpOptions, responseType: 'text' })
-      .subscribe((data: any) => {
-        console.log(data);
-      })
+    this.dataService.addUser(this.newuser)
   }
   
 }

@@ -1,7 +1,43 @@
 const fs = require('fs')
 // Usage: this.httpClient.post('http://localhost:3000/api/addUserToServer', {username, servername}, { ...httpOptions, responseType: 'text' })
 // Adds server to user groupList, still need to update group seperately
-module.exports = function(req, res) {
+module.exports = function(db, app, ObjectID) {
+    app.post('api/addUserToServer', (req, res) => {
+        if (!req.body) {
+            return res.sendStatus(400)
+        }
+
+        var username = req.username
+        var servername = req.servername
+        console.log("Adding: ", username, " to: ", servername)
+
+        const collection = db.collection('users');
+
+        collection.find({'username': username}).count((err,count) => {
+            if (count == 0) {
+                // No user exists, insert
+                var newuser = {
+                    id: ObjectID(),
+                    username: username,
+                    email: "",
+                    pw: "",
+                    supp: false,
+                    ofGroupAdminsRole: false,
+                    groupList: [ servername ]
+                }
+                collection.insertOne(newuser, (err,dbres) => {
+                    if (err) throw err;
+                    let num = dbres.insertedCount;
+                    res.send({'num': num, err: null})
+                })
+                // TODO Add to server
+            } else {
+                // TODO User Exists, add to server
+                res.send({num:0, err:"duplicate item"});
+            }
+        })
+    })
+
     console.log("AddUserToServer request recieved")
     var input = req.body;
     var username = input.username
@@ -44,7 +80,6 @@ module.exports = function(req, res) {
                 supp: false,
                 ofGroupAdminsRole: false,
                 groupList: [ servername ]
-
             }
             console.log("User does not exist, adding user")
             users.push(newuser)

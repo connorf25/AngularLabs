@@ -1,4 +1,7 @@
+import { ObjectID } from 'mongodb';
+
 export class User {
+    id: ObjectID;
     username: string;
     email:string;
     pw:string;
