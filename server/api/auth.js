@@ -8,31 +8,18 @@ module.exports = function(req, res) {
     customer.pw = req.body.pw;
     customer.valid = false;
 
-    fs.readFile('./server/data/users.json', 'utf8', (err, jsonString) => {
-        if (err) {
-            console.log("Error reading file from disk:", err)
-            res.send(customer);
-            return
+    const collection = db.collection('users');
+
+    collection.findOne({username: customer.username}).exec(function(err, user) {
+        if( user.pw == customer.pw ) {
+            customer = user
+            customer.valid = true
         }
-        try {
-            var users;
-            users = JSON.parse(jsonString)
-            console.log(users)
-            for (user in users) {
-                console.log(users[user])
-                if (customer.username == users[user].username && customer.pw == users[user].pw) {
-                    customer = { ...users[user] };
-                    customer.valid = true;
-                    break;
-                }
-            }
-            console.log("Sending: ", customer)
-            res.send(customer);
-        } catch(err) {
-            res.send(customer);
-            console.log('Error parsing JSON string:', err)
-        }
+        console.log(customer)
+        res.send(customer)
     })
+    console.log("User does not exist")
+    res.send(customer)
 
     if (!req.body) {
         console.log("Error: no request body")
