@@ -1,7 +1,7 @@
 const fs = require('fs')
 // Usage: this.httpClient.post('http://localhost:3000/api/auth', user, httpOptions)
 module.exports = function(db, app) {
-    app.post('api/auth', (req, res) => {
+    app.post('/api/auth', (req, res) => {
         if (!req.body) {
             console.log("Error: no request body")
             return res.sendStatus(400);
@@ -16,15 +16,13 @@ module.exports = function(db, app) {
     
         const collection = db.collection('users');
     
-        collection.findOne({username: customer.username}).exec(function(err, user) {
-            if( user.pw == customer.pw ) {
+        collection.findOne({username: customer.username}, function(err, user) {
+            if( user && user.pw == customer.pw ) {
                 customer = user
                 customer.valid = true
             }
             console.log(customer)
-            res.send(customer)
+            return res.send(customer)
         })
-        console.log("User does not exist")
-        res.send(customer)
     })
 }

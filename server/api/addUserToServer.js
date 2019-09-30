@@ -18,7 +18,7 @@ module.exports = function(db, app, ObjectID) {
             if (count == 0) {
                 // No user exists, insert
                 var newuser = {
-                    id: ObjectID(),
+                    _id: ObjectID(),
                     username: username,
                     email: "",
                     pw: "",

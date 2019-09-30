@@ -10,7 +10,7 @@ module.exports = function(db, app) {
         var newuser = req.body;
         const collection = db.collection('users');
 
-        collection.find({'id': newuser.id}).count((err,count) => {
+        collection.find({_id: newuser._id}).count((err,count) => {
             if (count == 0) {
                 collection.insertOne(newuser, (err,dbres) => {
                     if (err) throw err;

@@ -14,7 +14,7 @@ export class UserService {
 
   checkUser(username: string, pw: string): Observable<any> {
     var user = {"username": username, "pw": pw}
-    return this.httpClient.post('http://localhost:3000/api/auth', user, httpOptions)
+    return this.httpClient.post('http://localhost:3000/api/auth', user)
   }
 
 
