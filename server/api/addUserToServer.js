@@ -2,7 +2,7 @@ const fs = require('fs')
 // Usage: this.httpClient.post('http://localhost:3000/api/addUserToServer', {username, servername}, { ...httpOptions, responseType: 'text' })
 // Adds server to user groupList, still need to update group seperately
 module.exports = function(db, app, ObjectID) {
-    app.post('api/addUserToServer', (req, res) => {
+    app.post('/api/addUserToServer', (req, res) => {
         if (!req.body) {
             return res.sendStatus(400)
         }
@@ -32,7 +32,7 @@ module.exports = function(db, app, ObjectID) {
                     res.send({'num': num, err: null})
                 })
             } else {
-                // TODO User Exists, push to grouplist
+                // User Exists, push to grouplist
                 res.send({num:0, err:"duplicate item"});
                 collection.updateOne(
                     {username: username},

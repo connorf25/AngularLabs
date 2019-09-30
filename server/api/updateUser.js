@@ -1,61 +1,37 @@
 const fs = require('fs')
 // Usage: this.httpClient.post('http://localhost:3000/api/updateUser', userObject, { ...httpOptions, responseType: 'text' })
-module.exports = function(req, res) {
-    console.log("UpdateUser request recieved")
-    var user = req.body;
-    var users = [];
-
-    // Add some kind of authentication
-
-    fs.readFile('./server/data/users.json', 'utf8', (err, jsonString) => {
-        if (err) {
-            console.log("Error reading file from disk:", err)
-            res.send("Error reading file");
-            return
+module.exports = function(db, app) {
+    app.post('/api/updateUser', (req, res) => {
+        if (!req.body) {
+            console.log("Error: no request body")
+            return res.sendStatus(400);
         }
-        try {
-            users = JSON.parse(jsonString)
-            console.log(user.username);
-            for (i in users) {
-                if (users[i].username == user.username) {
-                    users[i] = user
-                    console.log(user)
-                    // Write to file
-                    jsonString = JSON.stringify(users)
-                    fs.writeFile('./server/data/users.json', jsonString, err => {
-                        if (err) {
-                            console.log('Error writing file', err)
-                            res.send("Error writing");
-                        } else {
-                            console.log('Successfully wrote file: updated user')
-                            res.send("Successfully updated user");
-                        }
-                    })
-                    return;
-                }
+        console.log("UpdateUser request recieved")
+        var user = req.body;
+        const collection = db.collection('users');
+
+        collection.find({_id: user._id}).count((err,count) => {
+            // No user exists, insert
+            if (count == 0) {
+                collection.insertOne(
+                    user,
+                    (err) => {
+                        if (err) throw err;
+                        res.send("User added");
+                    }
+                )
             }
-            // user usernname does not exist, add to array
-            jsonString = JSON.stringify(users)
-            fs.writeFile('./server/data/users.json', jsonString, err => {
-                if (err) {
-                    console.log('Error writing file', err)
-                    res.send("Error writing");
-                } else {
-                    console.log('Successfully wrote file: added user')
-                    res.send("Successfully added user");
-                }
-            })
-            return;
-            
-        } catch(err) {
-            res.send("Error parsing JSON");
-            console.log('Error parsing JSON string:', err)
-            return
-        }
+            // User exists, update 
+            else {
+                collection.updateOne(
+                    {_id: user._id},
+                    {$set: {username: user.username, email: user.email, pw: user.pw, supp: user.supp, ofGroupAdminsRole: user.ofGroupAdminsRole, groupList: user.groupList}},
+                    (err) => {
+                        if (err) throw err;
+                        res.send("User updated");
+                    }
+                )
+            }
+        })
     })
-
-    if (!req.body) {
-        console.log("Error: no request body")
-        return res.sendStatus(400);
-    }
 }

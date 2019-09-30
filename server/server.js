@@ -18,13 +18,13 @@ MongoClient.connect(url, { poolSize:10, useNewUrlParser: true, useUnifiedTopolog
     if (err) {return console.log(err)}
         const dbName = 'mydb';
         const db = client.db(dbName);
-        
+
         require('./api/addUser.js')(db, app);
         require('./api/addUserToServer.js')(db, app, ObjectID);
 
         require('./api/auth.js')(db, app);
 
-        // require('./api/getGroup.js')(db, app, ObjectID);
+        require('./api/getGroup.js')(db, app);
         // require('./api/getUsers.js')(db, app);
 
         // require('./api/removeGroup.js')(db, app, ObjectID);
