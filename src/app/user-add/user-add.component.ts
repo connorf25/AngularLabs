@@ -43,7 +43,7 @@ export class UserAddComponent implements OnInit {
       }
     }
     console.log(this.newuser)
-    this.dataService.addUser(this.newuser)
+    this.dataService.addUser(this.newuser).subscribe(data => console.log(data))
   }
   
 }

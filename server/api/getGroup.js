@@ -14,6 +14,8 @@ module.exports = function(db, app) {
         collection.findOne(
             {name: groupName},
             (err, group) => {
+                console.log("Sending group to client:")
+                console.log(group)
                 res.send(group)
             }
         )

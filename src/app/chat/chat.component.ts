@@ -13,7 +13,9 @@ const httpOptions = {
 };
 
 var checkIfAssistant = (user: User, group, admin): boolean => {
+  console.log("Checking if user is admin or groupAssis")
   console.log(user.username)
+  console.log(admin)
   console.log(group.groupAssis)
   if (user.username == admin) return true;
   for (var i in group.groupAssis) {
@@ -74,6 +76,7 @@ export class ChatComponent implements OnInit {
       this.activeGroup = data
 
       //If group does not exist remove from user grouplist
+      console.log("Active group:")
       console.log(data)
       if (data == null) {
         this.httpClient.post('http://localhost:3000/api/removeUserFromServer', {"username": this.user.username, "servername": this.selectedGroup}, { ...httpOptions, responseType: 'text' })
@@ -154,7 +157,7 @@ export class ChatComponent implements OnInit {
     if (!this.activeGroup.allUsers.includes(username)) {
       console.log("Adding new user: ", username)
       // SERVER: Add group to user groupList
-      this.httpClient.post('http://localhost:3000/api/addUserToServer', {"username": username, "servername": this.activeGroup.name}, { ...httpOptions, responseType: 'text' })
+      this.httpClient.post('http://localhost:3000/api/addUserToServer', {"username": username, "servername": this.activeGroup.name})
         .subscribe( (data:string) => {
           console.log(data)
           // Add user to group list

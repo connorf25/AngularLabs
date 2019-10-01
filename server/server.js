@@ -19,20 +19,23 @@ MongoClient.connect(url, { poolSize:10, useNewUrlParser: true, useUnifiedTopolog
         const dbName = 'mydb';
         const db = client.db(dbName);
 
+        // const collection = db.collection('users')
+        // collection.insertOne({username:"super",email:"super@gmail.com",pw:"123",supp:true,ofGroupAdminsRole:true,groupList:[]})
+
         require('./api/addUser.js')(db, app);
-        require('./api/addUserToServer.js')(db, app, ObjectID);
+        require('./api/addUserToServer.js')(db, app);
 
         require('./api/auth.js')(db, app);
 
         require('./api/getGroup.js')(db, app);
-        // require('./api/getUsers.js')(db, app);
+        require('./api/getUsers.js')(db, app);
 
-        // require('./api/removeGroup.js')(db, app, ObjectID);
-        // require('./api/removeUserFromServer.js')(db, app, ObjectID);
+        require('./api/removeGroup.js')(db, app);
+        require('./api/removeUserFromServer.js')(db, app);
 
-        // require('./api/updateGroup.js')(db, app, ObjectID);
-        // require('./api/updateUser.js')(db, app, ObjectID);
-        // require('./api/updateUsers.js')(db, app, ObjectID);
+        require('./api/updateGroup.js')(db, app, ObjectID);
+        require('./api/updateUser.js')(db, app, ObjectID);
+        require('./api/updateUsers.js')(db, app);
 
     require('./listen.js')(http);
 })

@@ -7,8 +7,8 @@ module.exports = function(db, app, ObjectID) {
             return res.sendStatus(400)
         }
 
-        var username = req.username
-        var servername = req.servername
+        var username = req.body.username
+        var servername = req.body.servername
         var num = 0
         console.log("Adding: ", username, " to: ", servername)
 
@@ -18,7 +18,6 @@ module.exports = function(db, app, ObjectID) {
             if (count == 0) {
                 // No user exists, insert
                 var newuser = {
-                    _id: ObjectID(),
                     username: username,
                     email: "",
                     pw: "",
