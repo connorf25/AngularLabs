@@ -5,8 +5,7 @@ module.exports = {
 
             socket.on('message', (message_data) => {
                 room = message_data.room
-                message = message_data.message
-                io.sockets.in(room).emit('message', message);
+                io.sockets.in(room).emit('message', message_data);
             })
 
             socket.on('create', function (room) {

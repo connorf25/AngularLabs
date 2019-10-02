@@ -46,7 +46,7 @@
                 
                 <h3>Chat Messages</h3>
                 <ul>
-                    <li *ngFor="let message of messages">{{message}}</li>
+                    <li *ngFor="let message_data of messages_data">{{message_data.message}}</li>
                 </ul>   
             </div>
             <ng-template #noChannel>

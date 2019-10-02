@@ -9,6 +9,7 @@ import { User } from '../services/user.class';
 import { Group, Channel } from '../services/group.class';
 import { group } from '@angular/animations';
 import { SocketService } from '../services/socket.service';
+import { Message_Data } from '../services/message.class';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -42,7 +43,7 @@ export class ChatComponent implements OnInit {
   selectedGroup: string;
   ofGroupAssistantRole: boolean;
   msg:string = "";
-  messages:string[] = [];
+  messages_data:Message_Data[] = [];
   ioConnection:any;
 
   constructor(private router: Router, 
@@ -78,14 +79,15 @@ export class ChatComponent implements OnInit {
   private initToConnection() {
     this.socketService.initSocket();
     this.ioConnection = this.socketService.onMessage()
-      .subscribe((message:string) => {
-        this.messages.push(message);
+      .subscribe((messages_data:Message_Data) => {
+        this.messages_data.push(messages_data);
       })
   }
 
   send() {
+    console.log(this.user._id)
     if(this.msg && this.activeChannel.name) {
-      let message_data = {room: this.activeChannel.name, message: this.msg} 
+      let message_data = {room: this.activeChannel.name, message: this.msg, sender: this.user._id} 
       console.log(message_data);
       this.socketService.send(message_data);
       this.msg = null;
