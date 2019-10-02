@@ -41,6 +41,7 @@ export class ChatComponent implements OnInit {
   channels = [];
   user: User;
   selectedGroup: string;
+  selectedChannel: string;
   ofGroupAssistantRole: boolean;
   msg:string = "";
   messages_data:Message_Data[] = [];
@@ -142,6 +143,7 @@ export class ChatComponent implements OnInit {
 
   onSelectChannel(channel) :void {
     this.activeChannel = channel
+    this.selectedChannel = channel.name
     this.socketService.join(this.activeChannel.name)
     console.log(channel)
   }

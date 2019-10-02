@@ -21,7 +21,7 @@
             <h4>Channels</h4>
             <ul class="groups">
                 <li *ngFor="let channel of channels; index as i"
-                    [class.selected]="channel.name === activeChannel.name"
+                    [class.selected]="channel.name === selectedChannel"
                     (click)="onSelectChannel(channel)">
                     <span>{{channel.name}}</span>
                     <button *ngIf="ofGroupAssistantRole" type="button" class="close" aria-label="Close" (click)="deleteChannel(i)">
