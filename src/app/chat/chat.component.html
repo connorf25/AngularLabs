@@ -45,9 +45,28 @@
                 </form>
                 
                 <h3>Chat Messages</h3>
-                <ul>
-                    <li *ngFor="let message_data of messages_data">{{message_data.message}}</li>
-                </ul>   
+                <div *ngFor="let message_data of messages_data">
+                    <div *ngIf="message_data.sender === user._id; else otherSender">
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="msg_container_send">
+                                {{message_data.message}}
+                            </div>
+                            <div class="img_cont_msg">
+                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #otherSender>
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                            </div>
+                            <div class="msg_container">
+                                {{message_data.message}}
+                            </div>
+                        </div>
+                    </ng-template>
+                </div> 
             </div>
             <ng-template #noChannel>
                 <p>Please connect to a channel</p>

@@ -1,4 +1,33 @@
+.img_cont_msg{
+  height: 40px;
+  width: 40px;
+}
 
+.user_img_msg{
+  height: 40px;
+  width: 40px;
+  border:1.5px solid #f5f6fa;
+}
+
+.msg_container_send{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+  border-radius: 25px;
+  background-color: #78e08f;
+  padding: 10px;
+  position: relative;
+}
+
+.msg_container{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  border-radius: 25px;
+  background-color: #82ccdd;
+  padding: 10px;
+  position: relative;
+}
 
 div[ng-view]{
     height: 100%;
