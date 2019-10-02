@@ -21,7 +21,7 @@
             <h4>Channels</h4>
             <ul class="groups">
                 <li *ngFor="let channel of channels; index as i"
-                    [class.selected]="channel.name === selectedChannel"
+                    [class.selected]="channel.name === activeChannel.name"
                     (click)="onSelectChannel(channel)">
                     <span>{{channel.name}}</span>
                     <button *ngIf="ofGroupAssistantRole" type="button" class="close" aria-label="Close" (click)="deleteChannel(i)">
@@ -33,6 +33,25 @@
         </div>
         <div class="col-6">
             <h4>Chat</h4>
+            <div *ngIf="activeChannel; else noChannel">
+                <form>
+                    <div class="form-group">
+                        <label for="messagecontent">New Message</label>
+                        <input type="text" [(ngModel)]="msg" name="messagecontent" id="messagecontent" class="form-control" placeholder="Enter Message">
+                    </div>
+                    <div class="form-group">
+                        <button (click)="send()" class="btn btn-primary">Send Message</button>
+                    </div>
+                </form>
+                
+                <h3>Chat Messages</h3>
+                <ul>
+                    <li *ngFor="let message of messages">{{message}}</li>
+                </ul>   
+            </div>
+            <ng-template #noChannel>
+                <p>Please connect to a channel</p>
+            </ng-template>
         </div>
 
         <div class="col-2" *ngIf="activeGroup">

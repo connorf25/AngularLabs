@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../services/user.class';
 import { Group, Channel } from '../services/group.class';
 import { group } from '@angular/animations';
+import { SocketService } from '../services/socket.service';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -39,10 +40,15 @@ export class ChatComponent implements OnInit {
   channels = [];
   user: User;
   selectedGroup: string;
-  selectedChannel: string;
   ofGroupAssistantRole: boolean;
+  msg:string = "";
+  messages:string[] = [];
+  ioConnection:any;
 
-  constructor(private router: Router, private httpClient: HttpClient, private modalService: MDBModalService) { }
+  constructor(private router: Router, 
+              private httpClient: HttpClient, 
+              private modalService: MDBModalService,
+              private socketService: SocketService) { }
 
   modalRef: MDBModalRef;
   modalOptions = {
@@ -65,7 +71,27 @@ export class ChatComponent implements OnInit {
     if (!this.user || this.user.username == "" || !this.user.valid) {
       this.router.navigateByUrl('/login')
     }
-    this.groups = this.user.groupList;
+    this.groups = this.user.groupList? this.user.groupList : null;
+    this.initToConnection()
+  }
+
+  private initToConnection() {
+    this.socketService.initSocket();
+    this.ioConnection = this.socketService.onMessage()
+      .subscribe((message:string) => {
+        this.messages.push(message);
+      })
+  }
+
+  send() {
+    if(this.msg && this.activeChannel.name) {
+      let message_data = {room: this.activeChannel.name, message: this.msg} 
+      console.log(message_data);
+      this.socketService.send(message_data);
+      this.msg = null;
+    } else {
+      console.log("No message")
+    }
   }
 
   onSelect(group): void {
@@ -113,8 +139,8 @@ export class ChatComponent implements OnInit {
   }
 
   onSelectChannel(channel) :void {
-    this.selectedChannel = channel.name
     this.activeChannel = channel
+    this.socketService.join(this.activeChannel.name)
     console.log(channel)
   }
 

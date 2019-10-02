@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
+const io = require('socket.io')(http);
+const socket = require('./sockets.js')
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -37,5 +39,7 @@ MongoClient.connect(url, { poolSize:10, useNewUrlParser: true, useUnifiedTopolog
         require('./api/updateUser.js')(db, app, ObjectID);
         require('./api/updateUsers.js')(db, app);
 
-    require('./listen.js')(http);
+    port = 3000
+    socket.connect(io, port);
+    require('./listen.js')(http, port);
 })
