@@ -88,7 +88,12 @@ export class ChatComponent implements OnInit {
   send() {
     console.log(this.user._id)
     if(this.msg && this.activeChannel.name) {
-      let message_data = {room: this.activeChannel.name, message: this.msg, sender: this.user._id} 
+      let message_data: Message_Data = {
+        room: this.activeChannel.name, 
+        message: this.msg, 
+        sender: this.user.username,
+        pic: this.user.pic? this.user.pic : "https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png"
+      } 
       console.log(message_data);
       this.socketService.send(message_data);
       this.msg = null;

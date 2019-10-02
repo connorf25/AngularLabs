@@ -18,7 +18,6 @@
   padding: 10px;
   position: relative;
 }
-
 .msg_container{
   margin-top: auto;
   margin-bottom: auto;
@@ -27,6 +26,21 @@
   background-color: #82ccdd;
   padding: 10px;
   position: relative;
+}
+
+.msg_username{
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 10px;
+}
+.msg_username_send{
+  position: absolute;
+  right:0;
+  bottom: -15px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 10px;
 }
 
 div[ng-view]{

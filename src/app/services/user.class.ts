@@ -8,6 +8,7 @@ export class User {
     supp: boolean;
     ofGroupAdminsRole:boolean;
     groupList:string[];
+    pic?:string;
     valid?:boolean;
     birthdate?: string;
     age?:number;

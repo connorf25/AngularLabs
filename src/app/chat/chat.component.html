@@ -46,23 +46,25 @@
                 
                 <h3>Chat Messages</h3>
                 <div *ngFor="let message_data of messages_data">
-                    <div *ngIf="message_data.sender === user._id; else otherSender">
+                    <div *ngIf="message_data.sender === user.username; else otherSender">
                         <div class="d-flex justify-content-end mb-4">
                             <div class="msg_container_send">
                                 {{message_data.message}}
+                                <span class="msg_username_send">{{message_data.sender}}</span>
                             </div>
                             <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                                <img src="{{message_data.pic}}" class="rounded-circle user_img_msg">
                             </div>
                         </div>
                     </div>
                     <ng-template #otherSender>
                         <div class="d-flex justify-content-start mb-4">
                             <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                                <img src="{{message_data.pic}}" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_container">
                                 {{message_data.message}}
+                                <span class="msg_username">{{message_data.sender}}</span>
                             </div>
                         </div>
                     </ng-template>
