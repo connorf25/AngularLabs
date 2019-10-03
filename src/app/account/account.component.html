@@ -1,13 +1,26 @@
-<h1>Accounts Page</h1>
-<img src="https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png" />
-<h2>My Account</h2>
-<div *ngIf="user; else noUser">
-    <p>Username: {{user.username}}</p>
-    <p>Email: {{user.email}}</p>
-    <p>Birthdate: {{user.birthdate}}</p>
-    <p>Age: {{user.age}}</p>
-</div>
+<div class="container">
 
-<ng-template #noUser>
-    <p>Not logged in</p>
-</ng-template>
+    <div *ngIf="user; else noUser" class="card mx-auto" style="width: 18rem;">
+        <img class="card-img-top" src="{{user.pic}}" alt="Image not found">
+        <div class="card-body">
+            <h5 class="card-title">My Account</h5>
+            <p>Username: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Birthdate: {{user.birthdate}}</p>
+            <p>Age: {{user.age}}</p>
+            <a href="/profile" class="btn btn-primary">Edit</a>
+        </div>
+    </div>
+
+    <ng-template #noUser>
+            <div class="card mx-auto" style="width: 18rem;">
+                <img class="card-img-top" src="https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png" alt="Image not found">
+                <div class="card-body">
+                    <h5 class="card-title">My Account</h5>
+                    <p>Not logged in</p>
+                    <a href="/login" class="btn btn-primary">Login</a>
+                </div>
+            </div>
+    </ng-template>
+
+</div>
