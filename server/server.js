@@ -37,3 +37,5 @@ require('./api/updateUsers.js')(app);
 port = 3000
 socket.connect(io, port);
 require('./listen.js')(http, port);
+
+module.exports = app; // export for testing
