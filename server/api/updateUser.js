@@ -16,7 +16,7 @@ module.exports = function(app, ObjectID) {
             var user = req.body;
             const collection = db.collection('users');
 
-            collection.find({_id: ObjectID(user._id)}).count((err,count) => {
+            collection.find({username: user.username}).count((err,count) => {
                 // No user exists, insert
                 if (count == 0) {
                     console.log("User does not exist, adding new user")
