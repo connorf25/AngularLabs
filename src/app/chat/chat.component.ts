@@ -84,8 +84,19 @@ export class ChatComponent implements OnInit {
   private initToConnection() {
     this.socketService.initSocket();
     this.ioConnection = this.socketService.onMessage()
-      .subscribe((messages_data:Message_Data) => {
-        this.messages_data.push(messages_data);
+      .subscribe((message_data:Message_Data) => {
+        if(message_data.sender != 'SERVER')
+        {
+          // Get user image for each message (if not server sending message)
+          this.httpClient.post('http://localhost:3000/api/getUserImage', {username: message_data.sender})
+            .subscribe((data: any) => {
+              message_data.pic = data.image;
+            })
+        }
+        else
+        {
+          this.messages_data.push(message_data);
+        }
       })
   }
 
