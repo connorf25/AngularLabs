@@ -92,7 +92,7 @@ The client is responsible for displaying any data retrieved from the server. The
 ## Add User
 `/api/addUser`
 
-This route takes in a new user, then retrieves the users.json from storage, adds the user and overwrites the file.
+This route takes in a new user, and adds them to the collection if the username does not already exist
 
 Parameters: User object
 
@@ -138,6 +138,7 @@ Return Value: {image: url_to_image}
 `/api/getUsers`
 
 Retrieve the array of all users objects from users collection, used so a super admin can control all users on the server.
+
 Parameters: The user sending the request
 
 Return Value: Array of all user objects
@@ -146,6 +147,7 @@ Return Value: Array of all user objects
 `/api/removeGroup`
 
 Find the group from group name in groups collection, remove from the collection.
+
 Parameters: Group name
 
 Return Value: Success/error string
