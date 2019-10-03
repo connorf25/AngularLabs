@@ -196,7 +196,7 @@ Parameters: Array of user objects
 Return Value: Success/Error String
 
 # Client Server Interaction
-All critical data is stored within the server/data directory in two json files, groups.json and users.json to store group and user data. The majority of this interaction is performed from within the chat page. On the far-left side there is a list of groups that the user is currently added to. If the user is a group admin or super user, they will have the ability to delete groups by clicking an x next to the group name. This will remove the list from the clients group list and also update the server to remove that group. Any users within that group will see the group disappear form the group list.
+All critical data is stored within two mongodb collections (groups and users) to store group and user data. The majority of this interaction is performed from within the chat page. On the far-left side there is a list of groups that the user is currently added to. If the user is a group admin or super user, they will have the ability to delete groups by clicking an x next to the group name. This will remove the list from the clients group list and also update the server to remove that group. Any users within that group will see the group disappear form the group list.
 If the user clicks add group at the bottom of this list, a modal will popup asking the user to provide them with a group name. Upon clicking add, the group will be added to the server data and will now appear on the client’s screen.
 All functionality explained for groups also applies to channels, however the user will be able to add/remove channels if they are group assistant of that group.
 In the middle there is a large chat window which is not currently implemented.
