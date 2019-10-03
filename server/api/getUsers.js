@@ -13,11 +13,16 @@ module.exports = function(app) {
                 return res.sendStatus(400);
             }
             console.log("GetUsers request recieved")
-            const collection = db.collection('users')
-            collection.find({}).toArray((err,data) => {
-                if (err) throw err;
-                res.send(data);
-            })
+            // If user is super user
+            if(req.body.supp) {
+                const collection = db.collection('users')
+                collection.find({}).toArray((err,data) => {
+                    if (err) throw err;
+                    res.send(data);
+                })
+            } else {
+                res.send({err: "Invalid permissions"})
+            }
         })
     })
 }
