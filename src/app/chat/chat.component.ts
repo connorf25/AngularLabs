@@ -103,7 +103,14 @@ export class ChatComponent implements OnInit {
   }
 
   onSelect(group): void {
-    this.activeChannel = null;
+    // Leave socket room and clear messages
+    if (this.activeChannel) {
+      this.selectedChannel = null;
+      this.socketService.leave(this.activeChannel.name, this.user.username)
+      this.messages_data = null
+      this.msg = null
+      this.activeChannel = null;
+    }
     this.selectedGroup = group;
     this.channels = [];
     this.httpClient.post('http://localhost:3000/api/getGroup', {"name": this.selectedGroup}, httpOptions).subscribe((data: any) => {
@@ -147,9 +154,15 @@ export class ChatComponent implements OnInit {
   }
 
   onSelectChannel(channel) :void {
+    // Leave socket room and clear messages
+    if (this.activeChannel) {
+      this.socketService.leave(this.activeChannel.name, this.user.username)
+      this.messages_data = null
+      this.msg = null
+    }
     this.activeChannel = channel
     this.selectedChannel = channel.name
-    this.socketService.join(this.activeChannel.name)
+    this.socketService.join(this.activeChannel.name, this.user.username)
     console.log(channel)
   }
 

@@ -19,8 +19,12 @@ export class SocketService {
     this.socket.emit('message', message_data);
   }
 
-  public join(room: string): void {
-    this.socket.emit('create', room);
+  public join(room: string, username: string): void {
+    this.socket.emit('create', room, username);
+  }
+
+  public leave(room: string, username: string): void {
+    this.socket.emit('leave', room, username);
   }
 
   public onMessage(): Observable<any> {
