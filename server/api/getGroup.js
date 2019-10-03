@@ -20,8 +20,10 @@ module.exports = function(app) {
             collection.findOne(
                 {name: groupName},
                 (err, group) => {
-                    console.log("Sending group to client:")
-                    console.log(group.name)
+                    if (group) {
+                        console.log("Sending group to client:")
+                        console.log(group.name)
+                    }
                     res.send(group)
                 }
             )
