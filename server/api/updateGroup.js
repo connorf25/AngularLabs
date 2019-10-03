@@ -16,7 +16,7 @@ module.exports = function(app, ObjectID) {
             var group = req.body;
             const collection = db.collection('groups');
 
-            collection.find({_id: ObjectID(group._id)}).count((err,count) => {
+            collection.find({name: group.name}).count((err,count) => {
                 // No group exists, insert
                 if (count == 0) {
                     console.log("Inserting new group: ", group.name)
@@ -32,7 +32,7 @@ module.exports = function(app, ObjectID) {
                 else {
                     console.log("Updating group: ", group.name)
                     collection.updateOne(
-                        {_id: ObjectID(group._id)},
+                        {name: group.name},
                         {$set: {name: group.name, groupAdmin: group.groupAdmin, groupAssis: group.groupAssis, channels: group.channels, allUsers: group.allUsers}},
                         {multi: true},
                         (err) => {

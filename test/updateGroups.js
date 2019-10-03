@@ -24,10 +24,6 @@ let groups = [
                 {
                         "name" : "Channel 2",
                         "users" : [ ]
-                },
-                {
-                        "name" : "TestChannel",
-                        "users" : [ ]
                 }
         ],
         "allUsers" : [

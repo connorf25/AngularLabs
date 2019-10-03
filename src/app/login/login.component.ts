@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         } 
         else {
           console.log("Invalid username or email");
-          // Show dialog that informs user
+          this.fail = true;
         }
       })
   }
