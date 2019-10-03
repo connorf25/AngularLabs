@@ -15,7 +15,7 @@ module.exports = function(app, ObjectID) {
             console.log("UpdateUser request recieved")
             var user = req.body;
             const collection = db.collection('users');
-
+            
             collection.find({username: user.username}).count((err,count) => {
                 // No user exists, insert
                 if (count == 0) {
@@ -32,8 +32,8 @@ module.exports = function(app, ObjectID) {
                 else {
                     console.log("Updating user")
                     collection.updateOne(
-                        {_id: ObjectID(user._id)},
-                        {$set: {username: user.username, email: user.email, pw: user.pw, supp: user.supp, ofGroupAdminsRole: user.ofGroupAdminsRole, groupList: user.groupList}},
+                        {username: user.username},
+                        {$set: {username: user.username, email: user.email, pw: user.pw, supp: user.supp, ofGroupAdminsRole: user.ofGroupAdminsRole, groupList: user.groupList, pic: user.pic}},
                         (err) => {
                             if (err) throw err;
                             res.send("User updated");

@@ -16,7 +16,7 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle( "Account" );
     this.user = JSON.parse(sessionStorage.getItem('user'))
-    if (this.user && (typeof this.user.pic == 'undefined' || this.user.pic))
+    if (this.user && (typeof this.user.pic == 'undefined' || !this.user.pic))
       this.user.pic = 'https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png'
   }
   

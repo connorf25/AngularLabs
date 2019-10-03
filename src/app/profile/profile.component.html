@@ -3,6 +3,11 @@
     <div class="card-body">
         <h5>Edit Account</h5>
         <mat-form-field class="example-full-width">
+            <mat-label>Avatar URL</mat-label>
+            <input matInput [(ngModel)]="user.pic" placeholder={{user.pic}}>
+        </mat-form-field><br>
+
+        <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
             <input matInput [(ngModel)]="user.email" placeholder={{user.email}}>
         </mat-form-field><br>

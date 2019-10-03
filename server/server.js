@@ -25,6 +25,7 @@ require('./api/addUserToServer.js')(app);
 require('./api/auth.js')(app);
 
 require('./api/getGroup.js')(app);
+require('./api/getUserImage.js')(app);
 require('./api/getUsers.js')(app);
 
 require('./api/removeGroup.js')(app);

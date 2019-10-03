@@ -1,0 +1,10 @@
+.cover-image {
+    /* src image (replaced original since it's not available anymore) */
+    background-image: url(https://cdn2us.denofgeek.com/sites/denofgeekus/files/styles/main_wide/public/2019/05/doomsday-clock-10-watchmen-dr-manhattan-superman-dc-universe.jpg?itok=l95rPFCa);
+    
+    background-size:cover;
+    background-position: center;
+    
+    /* desired height */
+    height: 200px;
+}
