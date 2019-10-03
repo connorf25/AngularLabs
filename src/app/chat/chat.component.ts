@@ -169,12 +169,21 @@ export class ChatComponent implements OnInit {
     })
   }
 
-  onSelectChannel(channel) :void {
+  onSelectChannel(channel: Channel) :void {
     // Leave socket room and clear messages
     if (this.activeChannel) {
       this.socketService.leave(this.activeChannel.name, this.user.username)
-      this.messages_data = null
       this.msg = null
+    }
+    for (let message of channel.messages)
+    {
+      // Get user image for each message (if not server sending message)
+      this.httpClient.post('http://localhost:3000/api/getUserImage', {username: message.sender})
+        .subscribe((data: any) => {
+          message.pic = data.image;
+          console.log(message)
+          this.messages_data.push(message);
+      })
     }
     this.activeChannel = channel
     this.selectedChannel = channel.name
