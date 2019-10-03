@@ -86,11 +86,12 @@ export class ChatComponent implements OnInit {
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message_data:Message_Data) => {
         if(message_data.sender != 'SERVER')
-        {
+        {    
           // Get user image for each message (if not server sending message)
           this.httpClient.post('http://localhost:3000/api/getUserImage', {username: message_data.sender})
             .subscribe((data: any) => {
               message_data.pic = data.image;
+              this.messages_data.push(message_data);
             })
         }
         else
@@ -102,13 +103,11 @@ export class ChatComponent implements OnInit {
 
   // Send message to active channel
   send() {
-    console.log(this.user._id)
     if(this.msg && this.activeChannel.name) {
       let message_data: Message_Data = {
         room: this.activeChannel.name, 
         message: this.msg, 
         sender: this.user.username,
-        pic: this.user.pic? this.user.pic : "https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png"
       } 
       console.log(message_data);
       this.socketService.send(message_data);
