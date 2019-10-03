@@ -31,6 +31,7 @@ require('./api/removeGroup.js')(app);
 require('./api/removeUserFromServer.js')(app);
 
 require('./api/updateGroup.js')(app, ObjectID);
+require('./api/updateGroups.js')(app, ObjectID);
 require('./api/updateUser.js')(app, ObjectID);
 require('./api/updateUsers.js')(app);
 
