@@ -105,6 +105,7 @@ export class ChatComponent implements OnInit {
   send() {
     if(this.msg && this.activeChannel.name) {
       let message_data: Message_Data = {
+        group: this.activeGroup.name,
         room: this.activeChannel.name, 
         message: this.msg, 
         sender: this.user.username,

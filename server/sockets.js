@@ -1,12 +1,31 @@
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
+const dbName = 'mydb';
+
+pushToDB = (group, channel, message) => {
+    MongoClient.connect(url, { poolSize:10, useNewUrlParser: true, useUnifiedTopology: true }, function(err,client) {
+        if (err) {return console.log(err)}
+        const db = client.db(dbName);
+        const collection = db.collection('groups');
+
+        collection.updateOne(
+            { "name": group, "channels.name": channel },
+            { $push: {"channels.$.messages": message} }
+        )
+    })
+}
+
 module.exports = {
     connect: function(io, PORT) {
         io.on('connection', (socket) => {
             console.log("User connection on port " + PORT + ":" + socket.id);
 
             socket.on('message', (message_data) => {
+                group = message_data.group
                 room = message_data.room
                 io.sockets.in(room).emit('message', message_data);
-                // Add code here to push to DB
+                // Push message to DB
+                pushToDB(group, room, message_data)
             })
 
             socket.on('create', function (room, username) {

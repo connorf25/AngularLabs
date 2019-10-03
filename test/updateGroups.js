@@ -19,11 +19,13 @@ let groups = [
                         "name" : "Channel 1",
                         "users" : [
                                 "New"
-                        ]
+                        ],
+                        "messages" : []
                 },
                 {
                         "name" : "Channel 2",
-                        "users" : [ ]
+                        "users" : [ ],
+                        "messages" : []
                 }
         ],
         "allUsers" : [
