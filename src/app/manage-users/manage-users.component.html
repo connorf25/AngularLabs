@@ -1,9 +1,23 @@
 <div *ngIf="myuser.supp; else elseBlock">
     <h1>Manage Users</h1>
-    <div *ngFor="let user of users; index as i">
-        <label>{{user.username }} </label><button (click)="delete(i)">Delete</button>
-    </div>
+    <table class="table">
+        <tr>
+            <th>User</th>
+            <th>Email</th>
+            <th>Super User</th>
+            <th>Group Admin</th>
+            <th>Delete</th>
+        </tr>
+        <tr *ngFor="let user of users; index as i">
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.supp}}</td>
+            <td>{{user.ofGroupAdminsRole}}</td>
+            <td><button class="btn btn-warning" (click)="delete(i)">Delete</button></td>
+        </tr>
+    </table>
 </div>
+
 <ng-template #elseBlock>
     <p>Must be super admin</p>
 </ng-template>
