@@ -4,13 +4,13 @@ let should = chai.should()
 chai.use(chaiHttp)
 
 const app = require('../server/server.js')
-const route = '/api/removeGroup'
+const route = '/api/removeUserFromServer'
 
-let request = {name:"Test Group"};
+let request = {username:"Test User", servername: "Test 99"};
 
 
 describe(route, ()=> {
-	it('Delete group', (done)=> {
+	it('Remove user from server', (done)=> {
         chai.request(app).post(route)
             .send(request)
                 .end((err, res) => {

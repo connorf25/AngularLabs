@@ -16,7 +16,8 @@ module.exports = function(app) {
 
             users_collection.updateOne(
                 {username: username},
-                {$pull: { groupList: servername }}
+                {$pull: { groupList: servername }},
+                res.send({err: null})
             )
         })
     })
