@@ -16,11 +16,11 @@ module.exports = function(app) {
             var groupName = req.body.name;
             const collection = db.collection('groups')
 
-            collection.remove(
+            collection.deleteOne(
                 {name: groupName},
                 (err) => {
                     if (err) throw err;
-                    res.send("Successfully removed group")
+                    res.send({err: null})
                 }
             )
         })

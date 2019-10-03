@@ -333,7 +333,7 @@ export class ChatComponent implements OnInit {
           })
       }
       // SERVER: Remove Group
-      this.httpClient.post('http://localhost:3000/api/removeGroup', {"name": groupName}, { ...httpOptions, responseType: 'text' })
+      this.httpClient.post('http://localhost:3000/api/removeGroup', {"name": groupName})
         .subscribe((data:string) => console.log(data))
     })
   }

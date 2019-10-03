@@ -26,7 +26,6 @@ describe(route, ()=> {
         chai.request(app).post(route)
             .send(noGroup)
                 .end((err, res) => {
-                    console.log(res)
                     res.should.have.status(200);
                     done();
                 })

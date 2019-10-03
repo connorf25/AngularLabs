@@ -21,7 +21,7 @@ module.exports = function(app) {
                 {name: groupName},
                 (err, group) => {
                     console.log("Sending group to client:")
-                    console.log(group)
+                    console.log(group.name)
                     res.send(group)
                 }
             )
