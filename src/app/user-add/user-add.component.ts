@@ -14,7 +14,7 @@ const httpOptions = {
   styleUrls: ['./user-add.component.scss']
 })
 export class UserAddComponent implements OnInit {
-  user: any;
+  user: User;
   suppString = "false";
   ofGroupAdminsRoleString = "false";
 
@@ -24,7 +24,7 @@ export class UserAddComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'))
-    if (!this.user || this.user == "null" || !this.user.valid) {
+    if (!this.user || !this.user.valid) {
       this.router.navigateByUrl('/login')
     }
   }

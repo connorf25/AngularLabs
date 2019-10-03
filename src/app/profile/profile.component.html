@@ -1,28 +1,28 @@
 <div *ngIf="user; else noUser" class="card mx-auto" style="width: 18rem;">
     <img class="card-img-top" src="{{user.pic}}" alt="Image not found">
     <div class="card-body">
-            <h5>Edit Account</h5>
-            <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input matInput [(ngModel)]="user.email" placeholder={{user.email}}>
-            </mat-form-field><br>
-            
-            <mat-form-field class="example-full-width">
-                <mat-label>Birth Date</mat-label>
-                <input matInput [(ngModel)]="user.birthdate" placeholder={{user.birthdate}} type="date">
-            </mat-form-field><br>
-            
-            <mat-form-field class="example-full-width">
-                    <mat-label>Age</mat-label>
-                <input matInput [(ngModel)]="user.age" placeholder={{user.age}} type="number">
-            </mat-form-field><br>
-            
-            <mat-form-field class="example-full-width">
-                    <mat-label>Password</mat-label>
-                <input matInput [(ngModel)]="user.pw" placeholder={{user.pw}} type="password">
-            </mat-form-field><br>
-            
-            <button class="btn btn-primary" (click)="save()">Save</button>
+        <h5>Edit Account</h5>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="user.email" placeholder={{user.email}}>
+        </mat-form-field><br>
+        
+        <mat-form-field class="example-full-width">
+            <mat-label>Birth Date</mat-label>
+            <input matInput [(ngModel)]="user.birthdate" placeholder={{user.birthdate}} type="date">
+        </mat-form-field><br>
+        
+        <mat-form-field class="example-full-width">
+                <mat-label>Age</mat-label>
+            <input matInput [(ngModel)]="user.age" placeholder={{user.age}} type="number">
+        </mat-form-field><br>
+        
+        <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+            <input matInput [(ngModel)]="user.pw" placeholder={{user.pw}} type="password">
+        </mat-form-field><br>
+        
+        <button class="btn btn-primary" (click)="save()">Save</button>
     </div>
 </div>
 

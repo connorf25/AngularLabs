@@ -1,22 +1,49 @@
 <div *ngIf="user.supp || user.ofGroupAdminsRole; else elseBlock">
-    <h1>Add Account</h1>
-    <label>Username: </label><input [(ngModel)]="newuser.username"><br>
-    <label>Email: </label><input [(ngModel)]="newuser.email"><br>
-    <label>Password: </label><input [(ngModel)]="newuser.pw"><br>
-    <label>Birthdate: </label><input [(ngModel)]="newuser.birthdate" type="date"><br>
-    <label>Age: </label><input [(ngModel)]="newuser.age" type="number"><br>
-    <label>Super User: </label><input [(ngModel)]="suppString"><br>
-    <label>Group Admin: </label><input [(ngModel)]="ofGroupAdminsRoleString"><br>
-    <button (click)="add()">Add</button>
-    <!-- <mat-form-field>
-        <mat-label>Super User</mat-label>
-        <mat-select>
-            <mat-option *ngFor="let option of [true, false]" [value]="newuser.supp">
-            {{option}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field> -->
+    <div class="card mx-auto" style="width: 18rem;">
+        <div class="card-body">
+            <h5>Add Account</h5>
+            <mat-form-field class="example-full-width">
+                <input matInput [(ngModel)]="newuser.username" placeholder="Username">
+            </mat-form-field><br>
+
+            <mat-form-field class="example-full-width">
+                <input matInput [(ngModel)]="newuser.email" placeholder="Email">
+            </mat-form-field><br>
+            
+            <mat-form-field class="example-full-width">
+                <mat-label>Birthdate</mat-label>
+                <input matInput [(ngModel)]="newuser.birthdate" placeholder={{user.birthdate}} type="date">
+            </mat-form-field><br>
+            
+            <mat-form-field class="example-full-width">
+                <input matInput [(ngModel)]="newuser.age" placeholder="Age" type="number">
+            </mat-form-field><br>
+            
+            <mat-form-field class="example-full-width">
+                <input matInput [(ngModel)]="newuser.pw" placeholder="Password" type="password">
+            </mat-form-field><br>
+
+            <mat-form-field>
+                <mat-label>Super User</mat-label>
+                <select [(value)]="suppString" matNativeControl required>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </mat-form-field><br>
+
+            <mat-form-field>
+                <mat-label>Group Admin</mat-label>
+                <select [(value)]="ofGroupAdminsRoleString" matNativeControl required>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </mat-form-field><br>
+            
+            <button class="btn btn-primary" (click)="save()">Save</button>
+        </div>
+    </div>
 </div>
+
 <ng-template #elseBlock>
     <p>Must be admin or super admin</p>
 </ng-template>
