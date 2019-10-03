@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../services/user.class';
+import { Title } from '@angular/platform-browser';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -14,9 +15,10 @@ const httpOptions = {
 export class ProfileComponent implements OnInit {
   user: User;
 
-  constructor(private router: Router, private httpClient: HttpClient) { }
+  constructor(private router: Router, private httpClient: HttpClient, private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle( "Account" );
     this.user = JSON.parse(sessionStorage.getItem('user'))
     if (this.user && (typeof this.user.pic == 'undefined' || this.user.pic))
       this.user.pic = 'https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png'

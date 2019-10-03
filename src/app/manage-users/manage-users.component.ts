@@ -7,6 +7,7 @@ const httpOptions = {
 };
 
 import { User } from "../services/user.class"
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-manage-users',
@@ -18,9 +19,10 @@ export class ManageUsersComponent implements OnInit {
   myuser: any;
   users: [];
 
-  constructor(private router: Router, private httpClient: HttpClient) { }
+  constructor(private router: Router, private httpClient: HttpClient, private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle( "Manage Users" );
     this.myuser = JSON.parse(sessionStorage.getItem('user'))
     if (!this.myuser || this.myuser == "null" || !this.myuser.valid) {
       this.router.navigateByUrl('/login')

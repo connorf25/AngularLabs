@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../services/user.class';
 import { DataService } from '../services/data.service';
+import { Title } from '@angular/platform-browser';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
@@ -20,9 +21,10 @@ export class UserAddComponent implements OnInit {
 
   newuser = new User();
 
-  constructor(private router: Router, private httpClient: HttpClient, private dataService: DataService) { }
+  constructor(private router: Router, private httpClient: HttpClient, private dataService: DataService, private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle( "Add User" );
     this.user = JSON.parse(sessionStorage.getItem('user'))
     if (!this.user || !this.user.valid) {
       this.router.navigateByUrl('/login')

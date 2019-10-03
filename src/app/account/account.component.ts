@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../services/user.class';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-account',
@@ -10,9 +11,10 @@ import { User } from '../services/user.class';
 export class AccountComponent implements OnInit {
   user: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle( "Account" );
     this.user = JSON.parse(sessionStorage.getItem('user'))
     if (this.user && (typeof this.user.pic == 'undefined' || this.user.pic))
       this.user.pic = 'https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png'

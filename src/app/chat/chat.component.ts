@@ -10,6 +10,7 @@ import { Group, Channel } from '../services/group.class';
 import { group } from '@angular/animations';
 import { SocketService } from '../services/socket.service';
 import { Message_Data } from '../services/message.class';
+import { Title } from '@angular/platform-browser';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -50,7 +51,8 @@ export class ChatComponent implements OnInit {
   constructor(private router: Router, 
               private httpClient: HttpClient, 
               private modalService: MDBModalService,
-              private socketService: SocketService) { }
+              private socketService: SocketService,
+              private title: Title) { }
 
   modalRef: MDBModalRef;
   modalOptions = {
@@ -69,6 +71,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title.setTitle( "Chat" );
     this.user = JSON.parse(sessionStorage.getItem('user'))
     if (!this.user || this.user.username == "" || !this.user.valid) {
       this.router.navigateByUrl('/login')

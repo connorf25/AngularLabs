@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-manage-groups',
@@ -14,9 +15,10 @@ export class ManageGroupsComponent implements OnInit {
     {name: "hi", channels: [{name: "one"}, {name: "two"}]}, 
     {name: "hello", channels: [{name: "three"}, {name: "four"}]}
   ]
-  constructor() { }
+  constructor(private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle( "Manage Groups" );
   }
 
 }
