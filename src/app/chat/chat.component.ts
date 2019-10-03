@@ -77,6 +77,7 @@ export class ChatComponent implements OnInit {
     this.initToConnection()
   }
 
+  // Initialize socket connection
   private initToConnection() {
     this.socketService.initSocket();
     this.ioConnection = this.socketService.onMessage()
@@ -85,6 +86,7 @@ export class ChatComponent implements OnInit {
       })
   }
 
+  // Send message to active channel
   send() {
     console.log(this.user._id)
     if(this.msg && this.activeChannel.name) {
@@ -328,14 +330,21 @@ export class ChatComponent implements OnInit {
         this.httpClient.post('http://localhost:3000/api/removeUserFromServer', {"username": group.allUsers[i], "servername": group.name}, { ...httpOptions, responseType: 'text' })
           .subscribe( (data:string) => {
             console.log(data)
-            // Update User Locally
-            sessionStorage.setItem('user', JSON.stringify(this.user));
           })
       }
       // SERVER: Remove Group
       this.httpClient.post('http://localhost:3000/api/removeGroup', {"name": groupName})
         .subscribe((data:string) => console.log(data))
     })
+
+    // Update local user to reflect change
+    for(let i = 0; i < this.user.groupList.length; i++) {
+      if(this.user.groupList[i] == groupName) {
+        this.user.groupList.splice(i, 1)
+        // Update User Locally
+        sessionStorage.setItem('user', JSON.stringify(this.user));
+      }
+    }
   }
 
   deleteChannel(index: number) {
