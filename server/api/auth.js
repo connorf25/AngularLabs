@@ -27,7 +27,7 @@ module.exports = function(app) {
                     customer = user
                     customer.valid = true
                 }
-                console.log(customer)
+                console.log("Correct login ", customer.valid)
                 return res.send(customer)
             })
         })
