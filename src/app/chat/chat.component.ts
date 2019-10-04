@@ -15,6 +15,7 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
+// Checks is user is admin or assistant
 var checkIfAssistant = (user: User, group, admin): boolean => {
   console.log("Checking if user is admin or groupAssis")
   console.log(user.username)
@@ -191,6 +192,7 @@ export class ChatComponent implements OnInit {
     console.log(channel)
   }
 
+  // Add new group
   addGroup() {
     this.modalOptions.data.heading = "Add Group";
     this.modalOptions.data.content.input = "Group Name";
@@ -213,6 +215,7 @@ export class ChatComponent implements OnInit {
     })
   }
 
+  // Add new channe
   addChannel() {
     this.modalOptions.data.heading = "Add Channel";
     this.modalOptions.data.content.input = "Channel Name";
@@ -225,6 +228,7 @@ export class ChatComponent implements OnInit {
       })
   }
 
+  // Add user to server
   addUserToServer(username: string) {
     // If user does not exist in server
     if (!this.activeGroup.allUsers.includes(username)) {
@@ -245,6 +249,7 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  // Generate modal to add user to server
   addUserToServerModal() {
     this.modalOptions.data.heading = "Add User to Server";
     this.modalOptions.data.content.input = "User Userame";
@@ -255,6 +260,7 @@ export class ChatComponent implements OnInit {
     })
   }
 
+  // Add assistant to group
   addAssistant() {
     this.modalOptions.data.heading = "Add Assistant";
     this.modalOptions.data.content.input = "Assistant Username";
@@ -274,6 +280,7 @@ export class ChatComponent implements OnInit {
 
   }
 
+  // Add a user to the channel
   addUserToChannel() {
     this.modalOptions.data.heading = "Add User";
     this.modalOptions.data.content.input = "User Userame";
